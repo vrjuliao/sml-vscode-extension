@@ -1,0 +1,57 @@
+{
+    "Let Binding": {
+        "prefix": "let",
+        "body": [
+            "let",
+            "  ${bindings}",
+            "in",
+            "  ${body}",
+            "end"
+        ]
+    },
+    "Local Declarations": {
+        "prefix": "local",
+        "body": [
+            "local",
+            "  ${bindings}",
+            "in",
+            "  ${decls}",
+            "end"
+        ]
+    },
+    "Case Statement": {
+        "prefix": "case",
+        "body": [
+            "case ${scrutinee} of",
+            "   ${pat1} => ${body1}",
+            " | ${pat2} => ${body2}"
+        ]
+    },
+    "Signature Declaration" : {
+        "prefix": "signature",
+        "body": [
+            "signature ${SIGNATURE} =",
+            "sig",
+            "  ${decls}",
+            "end"
+        ]
+    },
+    "Structure Declaration" : {
+        "prefix": "structure",
+        "body": [
+            "structure ${Structure} =",
+            "struct",
+            "  ${decls}",
+            "end"
+        ]
+    },
+    "Functor Declaration": {
+        "prefix": "functor",
+        "body": [
+            "functor ${Functor} (${Param} : ${SIGNATURE}) =",
+            "struct",
+            "  ${decls}",
+            "end"
+        ]
+    }
+}
