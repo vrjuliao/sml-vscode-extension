@@ -5,7 +5,7 @@ let sml;
 let smlOutput;
 
 function start(){
-	sml = spawn('sml');
+	sml = spawn('sml', [], {shell: true});
 	
 	sml.stdin.setEncoding('utf-8');
 	sml.stdout.setEncoding('utf-8');
@@ -13,6 +13,10 @@ function start(){
 	console.log('started');
 	sml.stdin.read(0);
 	
+	sml.on('error', function (err) {
+		console.log(err);
+	})
+
 	sml.stderr.on('data', (data) => {
 		smlOutput.show(false);
 		smlOutput.append(data + `\n`);
@@ -30,6 +34,7 @@ function execShortCode(){
 	if(!sml){
 		start();
 		setTimeout(()=>{execShortCode()}, 100);
+		return;
 	} 
 	const editor = vscode.window.activeTextEditor;
 
