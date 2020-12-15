@@ -34,7 +34,6 @@ function execShortCode(){
 	if(!sml){
 		start();
 		setTimeout(()=>{execShortCode()}, 100);
-		return;
 	} 
 	const editor = vscode.window.activeTextEditor;
 
