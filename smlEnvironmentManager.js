@@ -3,8 +3,10 @@ const vscode = require('vscode');
 
 let sml;
 let smlOutput;
+let allowNextCommand;
 
 function start(){
+	let allowNextCommand = false;
 	sml = spawn('sml', [], {shell: true});
 	
 	sml.stdin.setEncoding('utf-8');
@@ -16,12 +18,13 @@ function start(){
 	sml.on('error', function (err) {
 		console.log(err);
 	})
-
+	
 	sml.stderr.on('data', (data) => {
 		smlOutput.show(false);
 		smlOutput.append(data + `\n`);
+		allowNextCommand = true;
 	});
-
+	
 	sml.stdout.on('data', (data) => {
 		smlOutput.show(false);
 		smlOutput.append(data + `\n`);
@@ -30,11 +33,8 @@ function start(){
 	smlOutput.show(false);
 }
 
-function execShortCode(){
-	if(!sml){
-		start();
-		setTimeout(()=>{execShortCode()}, 100);
-	} 
+async function execShortCode(){
+	while(!sml && !allowNextCommand){;}
 	const editor = vscode.window.activeTextEditor;
 
 	if (editor) {

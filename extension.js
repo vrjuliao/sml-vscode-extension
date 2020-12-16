@@ -9,34 +9,13 @@ const smlEnviron = require('./smlEnvironmentManager');
  * @param {vscode.ExtensionContext} context
  */
 function activate(context) {
-	// vscode.commands.executeCommand('setContext', 'sml-environment:enabled', true).then(() => {
-		// smlEnviron.start();
-	// });
-	
-
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
+	// start sml exection
+	smlEnviron.start();
 	console.log('Congratulations, your extension "sml-environment" is now active!');
-
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with  registerCommand
-	// The commandId parameter must match the command field in package.json
-	let disposable = vscode.commands.registerCommand('sml-environment.helloWorld', function () {
-		// The code you place here will be executed every time your command is executed
-		// Display a message box to the user
-		vscode.window.showInformationMessage('Hello World from SML environment!');
-	});
 	
-	context.subscriptions.push(disposable);
+	let execShortText = vscode.commands.registerCommand('sml-environment.executeSelected', () => smlEnviron.execShortCode());
 	
-	let execShortText = vscode.commands.registerCommand('sml-environment.executeSelected', function () {
-		// The code you place here will be executed every time your command is executed
-		smlEnviron.execShortCode();
-
-		// Display a message box to the user
-		// vscode.window.showInformationMessage('Hello World from SML environment!');
-	});
-	context.subscriptions.push(execShortText);
+	context.subscriptions.push(execShortText);	
 }
 exports.activate = activate;
 
