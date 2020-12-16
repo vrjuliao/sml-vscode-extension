@@ -4,7 +4,7 @@ SML Environment is an extension for
 like [EMACS sml-mode](https://www.smlnj.org/doc/Emacs/sml-mode.html) and
 providing a text-highlight with some auto-complete features.
 
-This project is been developed by Vinícius Julião
+This project is been developed by **Vinícius Julião**
 ([`@vrjuliao`](https://github.com/vrjuliao)), but the text-highlight is an 
 updated version of
 [Standard ML](https://marketplace.visualstudio.com/items?itemName=freebroccolo.sml) extension
@@ -36,8 +36,7 @@ by **Darin Morrison** ([`@freebroccolo`](https://github.com/freebroccolo/))
   - Linux\
     **WARNING**: `smlnj` not work well in **WSL**.
     To use this extension on Windows, it is preferable install it directly in
-    Windows.
-
+    Windows.\
     Search for `smlnj` in your package manager.
     For instance, on Ubuntu terminal, type:
     ```bash
@@ -49,13 +48,10 @@ by **Darin Morrison** ([`@freebroccolo`](https://github.com/freebroccolo/))
     ```bash
     foo@bar:~$ brew install --cask smlnj
     ```
-  - Or else
+  - Or else\
     Follow the steps in
     [SML/NJ download page](https://www.smlnj.org/dist/working/110.98.1/index.html)
     for you operating system.
-
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
-
 
 ## Known Issues
 
@@ -64,7 +60,7 @@ If you have any requirements or dependencies, add a section describing those and
 
 ## Release Notes
 
-### 0.1
+### 0.0.1
 Initial release
 
 -----------------------------------------------------------------------------------------------------------

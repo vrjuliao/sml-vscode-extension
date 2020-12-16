@@ -3,6 +3,15 @@
 	"displayName": "SML environment",
 	"description": "Standard ML environment execution",
 	"version": "0.0.1",
+	"publisher": "vrjuliao",
+	"license": "Apache-2.0",
+	"bugs": {
+		"url": "https://github.com/vrjuliao/sml-vscode-extension/issues"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/vrjuliao/sml-vscode-extension"
+	},
 	"engines": {
 		"vscode": "^1.52.0"
 	},
