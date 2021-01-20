@@ -13,7 +13,7 @@ by **Darin Morrison** ([`@freebroccolo`](https://github.com/freebroccolo/))
 ## Features
 - Short Execution:
     1. Select a piece of SML code.
-    2. Press `Ctrl+Shift+Enter`.
+    2. Press `Ctrl+Enter`.
     3. See the result on Output console.
 
     <img src="https://github.com/vrjuliao/sml-vscode-extension/raw/master/demo-media/execution-example.gif" alt="demo of preview feature" height="440px">
@@ -52,7 +52,9 @@ by **Darin Morrison** ([`@freebroccolo`](https://github.com/freebroccolo/))
     Follow the steps in
     [SML/NJ download page](https://www.smlnj.org/dist/working/110.98.1/index.html)
     for you operating system.
+## Configuration
 
+There's a single parameter for the interpreter location. Defaults to sml
 ## Known Issues
 
 - Import files\

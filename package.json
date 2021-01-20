@@ -73,7 +73,18 @@
 				"language": "sml",
 				"path": "./syntax/sml.json"
 			}
-		]
+		],
+		"configuration": {
+			"title": "SML environment",
+			"properties": {
+				"sml-environment-interpreter-path": {
+					"type": "string",
+					"title": "SML interpreter path",
+					"default": "sml",
+					"$comment": "Usually sml or smlnj"
+				}
+			}
+		}
 	},
 	"scripts": {
 		"lint": "eslint .",
