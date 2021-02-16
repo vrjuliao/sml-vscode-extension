@@ -2,12 +2,13 @@ const spawn = require('child_process').spawn;
 const vscode = require('vscode');
 
 let sml;
-let smlOutput;
+const smlOutput = vscode.window.createOutputChannel("SML");
 let allowNextCommand;
 
 function start(){
-	let allowNextCommand = false;
-	sml = spawn('sml', [], {shell: true});
+	allowNextCommand = false;
+	const interpreter = vscode.workspace.getConfiguration().get("sml-environment-interpreter-path","sml")
+	sml = spawn(interpreter, [], {shell: true});
 	
 	sml.stdin.setEncoding('utf-8');
 	sml.stdout.setEncoding('utf-8');
@@ -17,6 +18,7 @@ function start(){
 	
 	sml.on('error', function (err) {
 		console.log(err);
+		smlOutput.append(err.message)
 	})
 	
 	sml.stderr.on('data', (data) => {
@@ -29,7 +31,6 @@ function start(){
 		smlOutput.show(false);
 		smlOutput.append(data + `\n`);
 	});
-	smlOutput = vscode.window.createOutputChannel("SML");
 	smlOutput.show(false);
 }
 
@@ -42,7 +43,16 @@ async function execShortCode(){
 		const selection = editor.selection;
 
 		const code = document.getText(selection);
-		sml.stdin.write(code+';');
+		if(sml.exitCode===0 || sml.exitCode) 
+			vscode.window.showErrorMessage("SML process died")
+		else {
+			try {
+				allowNextCommand = false;
+				sml.stdin.write(code+';');			
+			} catch (error) {
+				smlOutput.append(error.message)			
+			}
+		}
 	}
 }
 
