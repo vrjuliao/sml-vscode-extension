@@ -6,11 +6,11 @@
 	"publisher": "vrjuliao",
 	"license": "Apache-2.0",
 	"bugs": {
-		"url": "https://github.com/motendev/sml-vscode-extension/issues"
+		"url": "https://github.com/vrjuliao/sml-vscode-extension/issues"
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/motendev/sml-vscode-extension"
+		"url": "https://github.com/vrjuliao/sml-vscode-extension"
 	},
 	"engines": {
 		"vscode": "^1.52.0"
