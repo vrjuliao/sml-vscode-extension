@@ -11,15 +11,11 @@ function start() {
 
 	var cwd = {};
 	if (vscode.workspace.workspaceFolders !== undefined) {
-		var wd = vscode.workspace.workspaceFolders[0].uri.path;
-
-		//may start with / for some reason
-		if(wd[0] === '/')
-			wd = wd.substr(1, cwd.length);
+		var wd = vscode.workspace.workspaceFolders[0].uri.fsPath;
 
 		console.log("setting path to: " + wd)
 
-		cwd = {cwd: wd};
+		cwd = { cwd: wd };
 	}
 	else {
 		console.log("Unable to set working directory, no current workspace folder")
@@ -74,11 +70,10 @@ async function execShortCode() {
 }
 
 function restartREPL() {
-	//stop interpreter
-	sml.stdin.write("\0x26");
-	//stop cmdline
-	sml.stdin.end();	
-	//start again
+	if (sml.exitCode !== 0 && !sml.exitCode) {
+		sml.stdin.end();
+	}
+	sml.kill();
 	start();
 }
 
