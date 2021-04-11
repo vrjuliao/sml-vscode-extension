@@ -33,6 +33,10 @@
 			{
 				"command": "sml-environment.executeSelected",
 				"title": "Execute selected code"
+			},
+			{
+				"command": "sml-environment.restartRepl",
+				"title": "Restart SML REPL"
 			}
 		],
 		"keybindings": [
