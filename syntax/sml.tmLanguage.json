@@ -348,7 +348,10 @@
 			  {
 				"match": "(?!=(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])\\|(?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]))[:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]+",
 				"name": "variable.other.class.js message.error variable.interpolation string.regexp"
-			  }
+			  },
+				{
+					"include": "#exp"
+				}
 			]
 		  },
 		  {
