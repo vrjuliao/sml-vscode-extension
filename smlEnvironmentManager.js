@@ -61,7 +61,7 @@ async function execShortCode() {
 		else {
 			try {
 				allowNextCommand = false;
-				sml.stdin.write(code + ';');
+				sml.stdin.write(code + ';;;;\r\n');
 			} catch (error) {
 				smlOutput.append(error.message)
 			}
