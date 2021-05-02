@@ -13,10 +13,10 @@ function activate(context) {
 	smlEnviron.start();
 	console.log('Congratulations, your extension "sml-environment" is now active!');
 	
-	let execShortText = vscode.commands.registerCommand('sml-environment.executeSelected', () => smlEnviron.execShortCode());
-	let restartRepl = vscode.commands.registerCommand('sml-environment.restartRepl', () => smlEnviron.restartREPL());
+	let execShortCode = vscode.commands.registerCommand('sml-environment.execShortCode', () => smlEnviron.execShortCode());
+	let restartRepl = vscode.commands.registerCommand('sml-environment.restart', () => smlEnviron.restart());
 	
-	context.subscriptions.push(execShortText);
+	context.subscriptions.push(execShortCode);
 	context.subscriptions.push(restartRepl);	
 }
 exports.activate = activate;

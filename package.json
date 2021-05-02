@@ -20,13 +20,13 @@
 		"Snippets"
 	],
 	"activationEvents": [
-		"onCommand:sml-environment.executeSelected"
+		"onCommand:sml-environment.execShortCode"
 	],
 	"main": "./extension.js",
 	"contributes": {
 		"commands": [
 			{
-				"command": "sml-environment.executeSelected",
+				"command": "sml-environment.execShortCode",
 				"title": "SML Environment: Execute selected code"
 			},
 			{
@@ -36,7 +36,7 @@
 		],
 		"keybindings": [
 			{
-				"command": "sml-environment.executeSelected",
+				"command": "sml-environment.execShortCode",
 				"when": "editorLangId =~ /sml/",
 				"key": "ctrl+enter",
 				"mac": "cmd+enter"
