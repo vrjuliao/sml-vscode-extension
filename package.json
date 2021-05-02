@@ -20,28 +20,24 @@
 		"Snippets"
 	],
 	"activationEvents": [
-		"onCommand:sml-environment.helloWorld",
 		"onCommand:sml-environment.executeSelected"
 	],
 	"main": "./extension.js",
 	"contributes": {
 		"commands": [
 			{
-				"command": "sml-environment.helloWorld",
-				"title": "Hello World"
-			},
-			{
 				"command": "sml-environment.executeSelected",
-				"title": "Execute selected code"
+				"title": "SML Environment: Execute selected code"
 			},
 			{
-				"command": "sml-environment.restartRepl",
-				"title": "Restart SML REPL"
+				"command": "sml-environment.restart",
+				"title": "SML Environment: Restart environment"
 			}
 		],
 		"keybindings": [
 			{
 				"command": "sml-environment.executeSelected",
+				"when": "editorLangId =~ /sml/",
 				"key": "ctrl+enter",
 				"mac": "cmd+enter"
 			}

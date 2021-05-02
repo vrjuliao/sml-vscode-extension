@@ -69,7 +69,7 @@ async function execShortCode() {
 	}
 }
 
-function restartREPL() {
+function restart() {
 	if (sml.exitCode !== 0 && !sml.exitCode) {
 		sml.stdin.end();
 	}
@@ -84,6 +84,6 @@ function stop() {
 module.exports = {
 	start,
 	stop,
-	execShortCode,
-	restartREPL
+	restart,
+	execShortCode
 }
