@@ -1,9 +1,10 @@
 {
 	"name": "sml-environment",
-	"displayName": "SML environment",
+	"displayName": "SML Environment",
 	"description": "Standard ML environment execution",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"publisher": "vrjuliao",
+	"icon": "demo-media/icon.png",
 	"license": "Apache-2.0",
 	"bugs": {
 		"url": "https://github.com/vrjuliao/sml-vscode-extension/issues"
@@ -75,7 +76,7 @@
 			}
 		],
 		"configuration": {
-			"title": "SML environment",
+			"title": "SML Environment",
 			"properties": {
 				"sml-environment-interpreter-path": {
 					"type": "string",
