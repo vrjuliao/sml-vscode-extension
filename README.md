@@ -12,15 +12,25 @@ by **Darin Morrison** ([`@freebroccolo`](https://github.com/freebroccolo/))
 
 ## Features
 - Short Execution:
-    1. Select a piece of SML code.
-    2. Press `Ctrl+Enter`.
-    3. See the result on Output console.
+    1. Open a sml file (or change your Language Mode for `sml` by `Ctrl+K M`)
+    2. Select a piece of SML code.
+    3. Press `Ctrl+Enter` (Linux, Windows) or `Cmd+Enter` (Mac).
+    4. See the result on Output console.
 
     <img src="https://github.com/vrjuliao/sml-vscode-extension/raw/master/demo-media/execution-example.gif" alt="demo of preview feature" height="440px">
 
 - Text Highlight:
   
   <img src="https://github.com/vrjuliao/sml-vscode-extension/raw/master/demo-media/highlight.png" alt="demo of preview feature" height="160px">
+
+- `use` statement:\
+  To import a file to the environment, specify the filepath considering the
+  workspace root directory as the starting point.
+  For instance, if you have opened the folder `my_codes/workdir/`, and want to
+  import `my_codes/workdir/foo.sml`, then type:
+  ```sml
+  use "foo.sml"
+  ```
 
 ## Requirements
 
@@ -52,15 +62,23 @@ by **Darin Morrison** ([`@freebroccolo`](https://github.com/freebroccolo/))
     Follow the steps in
     [SML/NJ download page](https://www.smlnj.org/dist/working/110.98.1/index.html)
     for you operating system.
+
 ## Configuration
 
-There's a single parameter for the interpreter location. Defaults to sml
-## Known Issues
-
-- Import files\
-  Currently `use "<import_file>.sml"` is not working.
+Instead of add the sml interpreter to the `$PATH`, you can specify a binary for
+the sml interpreter.
+Just setting the `sml-environment-interpreter-path` attribute on your
+`settings.json` file.
 
 ## Release Notes
+
+### 0.0.2
+- `use` statement:\
+  Adding the capability for import files.
+
+- Bug fixed: Now, all syntax errors will be reported instantly.
+  
+- Syntax highlight fixes.
 
 ### 0.0.1
 Initial release
