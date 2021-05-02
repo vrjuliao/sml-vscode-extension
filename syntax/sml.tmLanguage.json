@@ -348,6 +348,9 @@
 			  {
 				"match": "(?!=(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])\\|(?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]))[:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]+",
 				"name": "variable.other.class.js message.error variable.interpolation string.regexp"
+			  },
+			  {
+				"include": "#exp"
 			  }
 			]
 		  },
@@ -948,6 +951,9 @@
 		  {
 			"match": "(?=[[:upper:]])(?!=\\b(?:abstype|and|andalso|as|case|datatype|do|else|end|eqtype|exception|false|fn|fun|functor|handle|if|in|infix|infixr|include|let|local|nonfix|of|op|open|orelse|raise|rec|sharing|sig|signature|struct|structure|then|true|type|val|where|while|with|withtype)\\b)\\b[[:alpha:]][[:alnum:]'_]*(?:\\b|(?=[[:space:]]))",
 			"name": "entity.name.class constant.numeric"
+		  },
+		  {
+			"include": "#exp"
 		  }
 		]
 	  },
@@ -1355,6 +1361,9 @@
 		  },
 		  {
 			"include": "#fundec"
+		  },
+		  {
+			"include": "#exp"
 		  }
 		]
 	  },
