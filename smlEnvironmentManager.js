@@ -75,14 +75,14 @@ async function execShortCode() {
 }
 
 async function execCurrentFile() {
-    restart()
+	restart()
 
 	const editor = vscode.window.activeTextEditor;
 
-    if (editor) {
-        const document = editor.document
-        const code = document.getText()
-        execCode(code);
+	if (editor) {
+		const document = editor.document
+		const code = document.getText()
+		execCode(code);
     }
 }
 
