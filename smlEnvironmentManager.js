@@ -47,26 +47,43 @@ function start() {
 	smlOutput.show(false);
 }
 
-async function execShortCode() {
+async function execCode(code) {
 	while (!sml && !allowNextCommand) { ; }
+
+	if (sml.exitCode === 0 || sml.exitCode)
+		vscode.window.showErrorMessage("SML process died")
+	else {
+		try {
+			allowNextCommand = false;
+			sml.stdin.write(code + ';;;;\r\n');
+		} catch (error) {
+			smlOutput.append(error.message)
+		}
+	}
+}
+
+
+async function execShortCode() {
 	const editor = vscode.window.activeTextEditor;
 
 	if (editor) {
 		const document = editor.document;
 		const selection = editor.selection;
-
 		const code = document.getText(selection);
-		if (sml.exitCode === 0 || sml.exitCode)
-			vscode.window.showErrorMessage("SML process died")
-		else {
-			try {
-				allowNextCommand = false;
-				sml.stdin.write(code + ';;;;\r\n');
-			} catch (error) {
-				smlOutput.append(error.message)
-			}
-		}
+		execCode(code);
 	}
+}
+
+async function execCurrentFile() {
+    restart()
+
+	const editor = vscode.window.activeTextEditor;
+
+    if (editor) {
+        const document = editor.document
+        const code = document.getText()
+        execCode(code);
+    }
 }
 
 function restart() {
@@ -85,5 +102,6 @@ module.exports = {
 	start,
 	stop,
 	restart,
-	execShortCode
+	execShortCode,
+	execCurrentFile
 }
