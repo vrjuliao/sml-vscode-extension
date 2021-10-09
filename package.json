@@ -2,7 +2,7 @@
 	"name": "sml-environment",
 	"displayName": "SML Environment",
 	"description": "Standard ML environment execution",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"publisher": "vrjuliao",
 	"icon": "demo-media/icon.png",
 	"license": "Apache-2.0",
@@ -21,7 +21,8 @@
 		"Snippets"
 	],
 	"activationEvents": [
-		"onCommand:sml-environment.execShortCode"
+		"onCommand:sml-environment.execShortCode",
+		"onCommand:sml-environment.execCurrentFile"
 	],
 	"main": "./extension.js",
 	"contributes": {
@@ -33,6 +34,10 @@
 			{
 				"command": "sml-environment.restart",
 				"title": "SML Environment: Restart environment"
+			},
+			{
+				"command": "sml-environment.execCurrentFile",
+				"title": "SML Environment: Execute current file"
 			}
 		],
 		"keybindings": [

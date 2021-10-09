@@ -32,6 +32,12 @@ by **Darin Morrison** ([`@freebroccolo`](https://github.com/freebroccolo/))
   use "foo.sml"
   ```
 
+- Run current File:\
+  **This option will restart the REPL environment**
+  1. Press `Ctrl+Shift+P` (Linux, Windows) or `Cmd+Shift+P` (Mac) open Command Palette.
+  2. Type `sml`.
+  3. Select "SML Environment: Execute current file".
+
 ## Requirements
 
 - ### SML/NJ
