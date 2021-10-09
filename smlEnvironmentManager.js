@@ -59,7 +59,7 @@ async function execCode(code) {
 			smlOutput.append(error.message);
 		}
 	}
-  await vscode.commands.executeCommand(
+	await vscode.commands.executeCommand(
 		"workbench.action.terminal.scrollToBottom"
 	);
 }

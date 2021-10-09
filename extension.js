@@ -19,7 +19,7 @@ function activate(context) {
 	
 	context.subscriptions.push(execShortCode);
 	context.subscriptions.push(restartRepl);	
-	context.subscriptions.push(execCurrentFile)	
+	context.subscriptions.push(execCurrentFile)
 }
 exports.activate = activate;
 
