@@ -1,5 +1,5 @@
-const spawn = require('child_process').spawn;
-const vscode = require('vscode');
+const spawn = require("child_process").spawn;
+const vscode = require("vscode");
 
 let sml;
 const smlOutput = vscode.window.createOutputChannel("SML");
@@ -7,40 +7,39 @@ let allowNextCommand;
 
 function start() {
 	allowNextCommand = false;
-	const interpreter = vscode.workspace.getConfiguration().get("sml-environment-interpreter-path", "sml")
+	const interpreter = vscode.workspace
+	.getConfiguration()
+	.get("sml-environment-interpreter-path", "sml");
 
 	var cwd = {};
 	if (vscode.workspace.workspaceFolders !== undefined) {
 		var wd = vscode.workspace.workspaceFolders[0].uri.fsPath;
-
-		console.log("setting path to: " + wd)
-
+		console.log("setting path to: " + wd);
 		cwd = { cwd: wd };
+	} else {
+		console.log("Unable to set working directory, no current workspace folder");
 	}
-	else {
-		console.log("Unable to set working directory, no current workspace folder")
-	}
-
+	
 	sml = spawn(interpreter, [], Object.assign({ shell: true }, cwd));
-
-	sml.stdin.setEncoding('utf-8');
-	sml.stdout.setEncoding('utf-8');
-	sml.stderr.setEncoding('utf-8');
-	console.log('started');
+	
+	sml.stdin.setEncoding("utf-8");
+	sml.stdout.setEncoding("utf-8");
+	sml.stderr.setEncoding("utf-8");
+	console.log("started");
 	sml.stdin.read(0);
 
-	sml.on('error', function (err) {
+	sml.on("error", function (err) {
 		console.log(err);
-		smlOutput.append(err.message)
-	})
+		smlOutput.append(err.message);
+	});
 
-	sml.stderr.on('data', (data) => {
+	sml.stderr.on("data", (data) => {
 		smlOutput.show(false);
 		smlOutput.append(data + `\n`);
 		allowNextCommand = true;
 	});
 
-	sml.stdout.on('data', (data) => {
+	sml.stdout.on("data", (data) => {
 		smlOutput.show(false);
 		smlOutput.append(data + `\n`);
 	});
@@ -57,18 +56,21 @@ async function execShortCode() {
 
 		const code = document.getText(selection);
 		if (sml.exitCode === 0 || sml.exitCode)
-			vscode.window.showErrorMessage("SML process died")
+			vscode.window.showErrorMessage("SML process died");
 		else {
 			try {
 				allowNextCommand = false;
-				sml.stdin.write(code + ';;;;\r\n');
+				sml.stdin.write(code + ";;;;\r\n");
 			} catch (error) {
-				smlOutput.append(error.message)
+				smlOutput.append(error.message);
 			}
 		}
+		await vscode.commands.executeCommand(
+			"workbench.action.terminal.scrollToBottom"
+		);
 	}
 }
-
+	
 function restart() {
 	if (sml.exitCode !== 0 && !sml.exitCode) {
 		sml.stdin.end();
@@ -76,7 +78,7 @@ function restart() {
 	sml.kill();
 	start();
 }
-
+	
 function stop() {
 	sml.stdin.end();
 }
@@ -85,5 +87,5 @@ module.exports = {
 	start,
 	stop,
 	restart,
-	execShortCode
-}
+	execShortCode,
+};
