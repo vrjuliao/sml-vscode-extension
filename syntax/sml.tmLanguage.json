@@ -317,6 +317,9 @@
 			}
 		  },
 		  {
+			"include": "#comment"
+		  },
+		  {
 			"include": "#decDatatype"
 		  },
 		  {
