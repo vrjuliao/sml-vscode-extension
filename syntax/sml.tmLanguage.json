@@ -2,1555 +2,1555 @@
 	"name": "Standard ML",
 	"scopeName": "source.sml",
 	"fileTypes": [
-		".fun",
-		".sig",
-		".sml",
-		".cm",
-		".lex",
-		".grm"
+	  ".fun",
+	  ".sig",
+	  ".sml",
+	  ".cm",
+	  ".lex",
+	  ".grm"
 	],
 	"patterns": [
-		{
-			"include": "#topdec"
-		}
+	  {
+		"include": "#topdec"
+	  }
 	],
 	"repository": {
-		"appexp": {
-			"patterns": [
-				{
-					"include": "#atexp"
-				}
-			]
-		},
-		"atexp": {
-			"patterns": [
-				{
-					"include": "#comment"
-				},
-				{
-					"include": "#scon"
-				},
-				{
-					"include": "#constant"
-				},
-				{
-					"begin": "(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])#(?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])",
-					"end": "((?!=\\b(?:abstype|and|andalso|as|case|datatype|do|else|end|eqtype|exception|false|fn|fun|functor|handle|if|in|infix|infixr|include|let|local|nonfix|of|op|open|orelse|raise|rec|sharing|sig|signature|struct|structure|then|true|type|val|where|while|with|withtype)\\b)\\b[[:alpha:]][[:alnum:]'_]*(?:\\b|(?=[[:space:]])))|(?<=[[:digit:]\"])",
-					"beginCaptures": {
-						"0": {
-							"name": "variable.other.class.js message.error variable.interpolation string.regexp"
-						}
-					},
-					"endCaptures": {
-						"1": {
-							"name": "markup.inserted constant.language support.property-value entity.name.filename"
-						}
-					},
-					"patterns": [
-						{
-							"include": "#constantNumber"
-						},
-						{
-							"include": "#constantString"
-						}
-					]
-				},
-				{
-					"begin": "\\blet\\b",
-					"end": "(?<=[^[:word:]]end|^end)",
-					"captures": {
-						"0": {
-							"name": "keyword.control"
-						}
-					},
-					"patterns": [
-						{
-							"begin": "(?<=[^[:word:]]let|^let)",
-							"end": "\\bin\\b",
-							"endCaptures": {
-								"0": {
-									"name": "keyword.control"
-								}
-							},
-							"patterns": [
-								{
-									"include": "#dec"
-								}
-							]
-						},
-						{
-							"begin": "(?<=[^[:word:]]in|^in)",
-							"end": "\\bend\\b",
-							"endCaptures": {
-								"0": {
-									"name": "keyword.control"
-								}
-							},
-							"patterns": [
-								{
-									"include": "#exp"
-								}
-							]
-						}
-					]
-				},
-				{
-					"begin": "\\{",
-					"end": "\\}",
-					"captures": {
-						"0": {
-							"name": "entity.other.attribute-name.css constant.language constant.numeric"
-						}
-					},
-					"patterns": [
-						{
-							"include": "#exp"
-						}
-					]
-				},
-				{
-					"begin": "\\((?!=\\))",
-					"end": "\\)",
-					"captures": {
-						"0": {
-							"name": "punctuation.definition.tag"
-						}
-					},
-					"patterns": [
-						{
-							"begin": "(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]):(?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])",
-							"end": "(?=\\))",
-							"beginCaptures": {
-								"0": {
-									"name": "variable.other.class.js variable.interpolation keyword.operator keyword.control message.error"
-								}
-							},
-							"patterns": [
-								{
-									"include": "#ty"
-								}
-							]
-						},
-						{
-							"include": "#exp"
-						}
-					]
-				}
-			]
-		},
-		"atpat": {
-			"patterns": []
-		},
-		"comment": {
-			"begin": "\\(\\*",
-			"end": "\\*\\)",
-			"name": "comment",
-			"patterns": [
-				{
-					"include": "#comment"
-				}
-			]
-		},
-		"conbind": {
-			"patterns": [
-				{
-					"begin": "(?<=[^[:word:]]exception|^exception|[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]=|^=|[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]\\||^\\|)",
-					"end": "(\\bof\\b)|((?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])\\|(?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]))|(?=\\}|\\)|\\]|\\b(?:abstype|and|datatype|exception|fun|infix|infixr|local|nonfix|open|type|val|include|local|functor|signature|structure|end|in)\\b(?:$|[[:space:]]|(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])\\}|\\)|\\](?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])))",
-					"endCaptures": {
-						"1": {
-							"name": "keyword.control.switch"
-						},
-						"2": {
-							"name": "keyword.control.switch"
-						}
-					},
-					"patterns": [
-						{
-							"include": "#comment"
-						},
-						{
-							"match": "(?!=(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])\\|(?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]))[:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]+|(?!=\\b(?:abstype|and|andalso|as|case|datatype|do|else|end|eqtype|exception|false|fn|fun|functor|handle|if|in|infix|infixr|include|let|local|nonfix|of|op|open|orelse|raise|rec|sharing|sig|signature|struct|structure|then|true|type|val|where|while|with|withtype)\\b)\\b[[:alpha:]][[:alnum:]'_]*(?:\\b|(?=[[:space:]]))",
-							"name": "entity.other.attribute-name.css constant.language constant.numeric"
-						}
-					]
-				},
-				{
-					"begin": "(?<=[^[:word:]]of|^of)",
-					"end": "(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])\\|(?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])|(?=\\}|\\)|\\]|\\b(?:abstype|and|datatype|exception|fun|infix|infixr|local|nonfix|open|type|val|include|local|functor|signature|structure|end|in)\\b(?:$|[[:space:]]|(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])\\}|\\)|\\](?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])))",
-					"endCaptures": {
-						"0": {
-							"name": "keyword.control.switch"
-						}
-					},
-					"patterns": [
-						{
-							"include": "#comment"
-						},
-						{
-							"include": "#ty"
-						}
-					]
-				}
-			]
-		},
-		"condesc": {
-			"patterns": []
-		},
-		"constant": {
-			"patterns": [
-				{
-					"include": "#constantNumber"
-				},
-				{
-					"include": "#constantString"
-				},
-				{
-					"match": "\\bfalse|true\\b",
-					"name": "entity.other.attribute-name.css constant.language constant.numeric"
-				},
-				{
-					"include": "#qualifiedConstant"
-				},
-				{
-					"match": "\\(\\)",
-					"name": "entity.other.attribute-name.css constant.language constant.numeric"
-				},
-				{
-					"match": "\\[\\]",
-					"name": "entity.other.attribute-name.css constant.language constant.numeric"
-				},
-				{
-					"begin": "\\{",
-					"end": "\\}",
-					"captures": {
-						"0": {
-							"name": "entity.other.attribute-name.css constant.language constant.numeric"
-						}
-					},
-					"patterns": [
-						{
-							"include": "#row"
-						}
-					]
-				},
-				{
-					"begin": "\\[",
-					"end": "\\]",
-					"captures": {
-						"0": {
-							"name": "entity.other.attribute-name.css constant.language constant.numeric"
-						}
-					},
-					"patterns": [
-						{
-							"include": "#exp"
-						}
-					]
-				}
-			]
-		},
-		"constantNumber": {
-			"match": "(?<![[:alpha:]])[[:digit:]][[:digit:]]*(\\.[[:digit:]][[:digit:]]*)?",
-			"name": "constant.numeric"
-		},
-		"constantString": {
-			"begin": "\"",
-			"end": "\"",
-			"name": "string.double",
-			"patterns": [
-				{
-					"match": "\\\\\""
-				}
-			]
-		},
-		"datbind": {
-			"patterns": [
-				{
-					"begin": "(?<=[^[:word:]]abstype|^abstype|[^[:word:]]and|^and|[^[:word:]]datatype|^datatype)",
-					"end": "(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])=(?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])",
-					"endCaptures": {
-						"0": {
-							"name": "variable.other.class.js variable.interpolation keyword.operator keyword.control message.error"
-						}
-					},
-					"patterns": [
-						{
-							"include": "#comment"
-						},
-						{
-							"match": "(?!=\\b(?:abstype|and|andalso|as|case|datatype|do|else|end|eqtype|exception|false|fn|fun|functor|handle|if|in|infix|infixr|include|let|local|nonfix|of|op|open|orelse|raise|rec|sharing|sig|signature|struct|structure|then|true|type|val|where|while|with|withtype)\\b)\\b[[:alpha:]][[:alnum:]'_]*(?:\\b|(?=[[:space:]]))",
-							"name": "entity.name.function"
-						},
-						{
-							"include": "#ty"
-						}
-					]
-				},
-				{
-					"begin": "(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]=|^=)",
-					"end": "\\band\\b|(?=\\}|\\)|\\]|\\b(?:abstype|and|datatype|exception|fun|infix|infixr|local|nonfix|open|type|val|include|local|functor|signature|structure|end|in)\\b(?:$|[[:space:]]|(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])\\}|\\)|\\](?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])))",
-					"endCaptures": {
-						"0": {
-							"name": "variable.other.class.js variable.interpolation storage.modifier message.error"
-						}
-					},
-					"patterns": [
-						{
-							"include": "#conbind"
-						}
-					]
-				}
-			]
-		},
-		"datdesc": {
-			"patterns": []
-		},
-		"dec": {
-			"patterns": [
-				{
-					"begin": "\\babstype\\b",
-					"end": "\\bend\\b",
-					"captures": {
-						"0": {
-							"name": "keyword"
-						}
-					}
-				},
-				{
-					"include": "#comment"
-				},
-				{
-					"include": "#decDatatype"
-				},
-				{
-					"include": "#decException"
-				},
-				{
-					"begin": "\\bfun\\b",
-					"end": "(?=\\}|\\)|\\]|\\b(?:abstype|and|datatype|exception|fun|infix|infixr|local|nonfix|open|type|val|include|local|functor|signature|structure|end|in)\\b(?:$|[[:space:]]|(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])\\}|\\)|\\](?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])))",
-					"beginCaptures": {
-						"0": {
-							"name": "storage.type"
-						}
-					},
-					"patterns": [
-						{
-							"include": "#fvalbind"
-						}
-					]
-				},
-				{
-					"begin": "\\b(?:infix|infixr|nonfix)\\b",
-					"end": "(?=\\}|\\)|\\]|\\b(?:abstype|and|datatype|exception|fun|infix|infixr|local|nonfix|open|type|val|include|local|functor|signature|structure|end|in)\\b(?:$|[[:space:]]|(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])\\}|\\)|\\](?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])))",
-					"beginCaptures": {
-						"0": {
-							"name": "keyword.control"
-						}
-					},
-					"patterns": [
-						{
-							"match": "(?!=(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])\\|(?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]))[:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]+",
-							"name": "variable.other.class.js message.error variable.interpolation string.regexp"
-						},
-						{
-							"include": "#exp"
-						}
-					]
-				},
-				{
-					"begin": "\\bopen\\b",
-					"end": "(?=\\}|\\)|\\]|\\b(?:abstype|and|datatype|exception|fun|infix|infixr|local|nonfix|open|type|val|include|local|functor|signature|structure|end|in)\\b(?:$|[[:space:]]|(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])\\}|\\)|\\](?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])))",
-					"beginCaptures": {
-						"0": {
-							"name": "keyword.control.open"
-						}
-					},
-					"patterns": [
-						{
-							"include": "#qualifiedModule"
-						}
-					]
-				},
-				{
-					"include": "#decType"
-				},
-				{
-					"include": "#decVal"
-				}
-			]
-		},
-		"decDatatype": {
-			"patterns": [
-				{
-					"begin": "\\bdatatype\\b",
-					"end": "(?=\\}|\\)|\\]|\\b(?:abstype|and|datatype|exception|fun|infix|infixr|local|nonfix|open|type|val|include|local|functor|signature|structure|end|in)\\b(?:$|[[:space:]]|(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])\\}|\\)|\\](?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])))",
-					"beginCaptures": {
-						"0": {
-							"name": "keyword"
-						}
-					},
-					"patterns": [
-						{
-							"include": "#datbind"
-						}
-					]
-				}
-			]
-		},
-		"decException": {
-			"patterns": [
-				{
-					"begin": "\\bexception\\b",
-					"end": "(?=\\}|\\)|\\]|\\b(?:abstype|and|datatype|exception|fun|infix|infixr|local|nonfix|open|type|val|include|local|functor|signature|structure|end|in)\\b(?:$|[[:space:]]|(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])\\}|\\)|\\](?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])))",
-					"beginCaptures": {
-						"0": {
-							"name": "keyword"
-						}
-					},
-					"patterns": [
-						{
-							"include": "#comment"
-						},
-						{
-							"include": "#conbind"
-						}
-					]
-				}
-			]
-		},
-		"decType": {
-			"patterns": [
-				{
-					"begin": "\\btype\\b",
-					"end": "(?=\\}|\\)|\\]|\\b(?:abstype|and|datatype|exception|fun|infix|infixr|local|nonfix|open|type|val|include|local|functor|signature|structure|end|in)\\b(?:$|[[:space:]]|(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])\\}|\\)|\\](?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])))|(?=\\bwhere\\b|=)",
-					"beginCaptures": {
-						"0": {
-							"name": "keyword"
-						}
-					},
-					"patterns": [
-						{
-							"include": "#typbind"
-						}
-					]
-				}
-			]
-		},
-		"decVal": {
-			"begin": "\\bval\\b",
-			"end": "(?=\\}|\\)|\\]|\\b(?:abstype|and|datatype|exception|fun|infix|infixr|local|nonfix|open|type|val|include|local|functor|signature|structure|end|in)\\b(?:$|[[:space:]]|(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])\\}|\\)|\\](?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])))",
+	  "appexp": {
+		"patterns": [
+		  {
+			"include": "#atexp"
+		  }
+		]
+	  },
+	  "atexp": {
+		"patterns": [
+		  {
+			"include": "#comment"
+		  },
+		  {
+			"include": "#scon"
+		  },
+		  {
+			"include": "#constant"
+		  },
+		  {
+			"begin": "(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])#(?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])",
+			"end": "((?!=\\b(?:abstype|and|andalso|as|case|datatype|do|else|end|eqtype|exception|false|fn|fun|functor|handle|if|in|infix|infixr|include|let|local|nonfix|of|op|open|orelse|raise|rec|sharing|sig|signature|struct|structure|then|true|type|val|where|while|with|withtype)\\b)\\b[[:alpha:]][[:alnum:]'_]*(?:\\b|(?=[[:space:]])))|(?<=[[:digit:]\"])",
 			"beginCaptures": {
-				"0": {
-					"name": "storage.type"
-				}
-			},
-			"patterns": [
-				{
-					"include": "#valbind"
-				}
-			]
-		},
-		"exbind": {
-			"patterns": []
-		},
-		"exdesc": {
-			"patterns": []
-		},
-		"exp": {
-			"patterns": [
-				{
-					"include": "#atexp"
-				},
-				{
-					"match": "((?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]),(?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]))|(;|(?!=(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])\\|(?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]))[:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]+)|(\\bas\\b)",
-					"captures": {
-						"1": {
-							"name": "string.regexp"
-						},
-						"2": {
-							"name": "variable.other.class.js message.error variable.interpolation string.regexp"
-						},
-						"3": {
-							"name": "keyword"
-						}
-					}
-				},
-				{
-					"begin": "\\bhandle\\b",
-					"end": "(?=,|\\}|\\)|\\]|\\b(?:abstype|and|datatype|exception|fun|infix|infixr|local|nonfix|open|type|val|include|local|functor|signature|structure|end|in)\\b(?:$|[[:space:]]|(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]),|\\}|\\)|\\](?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])))",
-					"beginCaptures": {
-						"0": {
-							"name": "keyword.control.throwcatch"
-						}
-					},
-					"patterns": [
-						{
-							"include": "#match"
-						}
-					]
-				},
-				{
-					"match": "\\braise\\b",
-					"name": "keyword.control.throwcatch"
-				},
-				{
-					"begin": "\\bfn\\b",
-					"end": "(?=,|\\}|\\)|\\]|\\b(?:abstype|and|datatype|exception|fun|infix|infixr|local|nonfix|open|type|val|include|local|functor|signature|structure|end|in)\\b(?:$|[[:space:]]|(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]),|\\}|\\)|\\](?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])))",
-					"beginCaptures": {
-						"0": {
-							"name": "keyword"
-						}
-					},
-					"patterns": [
-						{
-							"include": "#match"
-						}
-					]
-				},
-				{
-					"patterns": [
-						{
-							"begin": "\\bcase\\b",
-							"end": "\\bof\\b",
-							"captures": {
-								"0": {
-									"name": "keyword.control.switch"
-								}
-							},
-							"patterns": [
-								{
-									"include": "#exp"
-								}
-							]
-						},
-						{
-							"begin": "(?<=[^[:word:]]of|^of)",
-							"end": "(?=,|\\}|\\)|\\]|\\b(?:abstype|and|datatype|exception|fun|infix|infixr|local|nonfix|open|type|val|include|local|functor|signature|structure|end|in)\\b(?:$|[[:space:]]|(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]),|\\}|\\)|\\](?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])))",
-							"endCaptures": {
-								"0": {
-									"name": "variable.other.class.js message.error variable.interpolation string.regexp"
-								}
-							},
-							"patterns": [
-								{
-									"include": "#match"
-								}
-							]
-						}
-					]
-				},
-				{
-					"match": "\\b(?:if|then|else)\\b",
-					"name": "keyword"
-				},
-				{
-					"match": "\\borelse\\b",
-					"name": "variable.other.class.js message.error variable.interpolation string.regexp"
-				},
-				{
-					"match": "\\bandalso\\b",
-					"name": "variable.other.class.js message.error variable.interpolation string.regexp"
-				},
-				{
-					"match": "\\b(?:while|do)\\b",
-					"name": "keyword"
-				}
-			]
-		},
-		"funbind": {
-			"patterns": [
-				{
-					"begin": "(?<=[^[:word:]]functor|^functor|[^[:word:]]and|^and)",
-					"end": "(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])(:)|(=)(?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])",
-					"endCaptures": {
-						"1": {
-							"name": "variable.other.class.js variable.interpolation keyword.operator keyword.control message.error"
-						},
-						"2": {
-							"name": "variable.other.class.js variable.interpolation keyword.operator keyword.control message.error"
-						}
-					},
-					"patterns": [
-						{
-							"include": "#comment"
-						},
-						{
-							"include": "#qualifiedModule"
-						},
-						{
-							"begin": "\\(",
-							"end": "\\)",
-							"captures": {
-								"0": {
-									"name": "punctuation.definition.tag"
-								}
-							},
-							"patterns": [
-								{
-									"include": "#spec"
-								},
-								{
-									"begin": "(?!=\\b(?:abstype|and|andalso|as|case|datatype|do|else|end|eqtype|exception|false|fn|fun|functor|handle|if|in|infix|infixr|include|let|local|nonfix|of|op|open|orelse|raise|rec|sharing|sig|signature|struct|structure|then|true|type|val|where|while|with|withtype)\\b)\\b[[:alpha:]][[:alnum:]'_]*(?:\\b|(?=[[:space:]]))",
-									"end": "(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]):(?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])",
-									"beginCaptures": {
-										"0": {
-											"name": "entity.name.class constant.numeric"
-										}
-									},
-									"endCaptures": {
-										"0": {
-											"name": "variable.other.class.js variable.interpolation keyword.operator keyword.control message.error"
-										}
-									}
-								},
-								{
-									"begin": "(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]:|^:)",
-									"end": "(?=\\))",
-									"patterns": [
-										{
-											"include": "#sigexp"
-										}
-									]
-								}
-							]
-						}
-					]
-				},
-				{
-					"begin": "(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]:|^:)",
-					"end": "(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])=(?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])",
-					"endCaptures": {
-						"0": {
-							"name": "variable.other.class.js variable.interpolation keyword.operator keyword.control message.error"
-						}
-					},
-					"patterns": [
-						{
-							"include": "#sigexp"
-						}
-					]
-				},
-				{
-					"begin": "(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]=|^=)",
-					"end": "(?=\\}|\\)|\\]|\\b(?:abstype|and|datatype|exception|fun|infix|infixr|local|nonfix|open|type|val|include|local|functor|signature|structure|end|in)\\b(?:$|[[:space:]]|(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])\\}|\\)|\\](?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])))",
-					"endCaptures": {
-						"0": {
-							"name": "keyword"
-						}
-					},
-					"patterns": [
-						{
-							"include": "#strexp"
-						}
-					]
-				},
-				{
-					"begin": "(?<=[^[:word:]]and|^and)",
-					"end": "(?=\\}|\\)|\\]|\\b(?:abstype|and|datatype|exception|fun|infix|infixr|local|nonfix|open|type|val|include|local|functor|signature|structure|end|in)\\b(?:$|[[:space:]]|(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])\\}|\\)|\\](?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])))",
-					"endCaptures": {
-						"0": {
-							"name": "keyword"
-						}
-					},
-					"patterns": [
-						{
-							"include": "#funbind"
-						}
-					]
-				}
-			]
-		},
-		"fundec": {
-			"patterns": [
-				{
-					"include": "#comment"
-				},
-				{
-					"begin": "\\bfunctor\\b",
-					"end": "(?=\\}|\\)|\\]|\\b(?:abstype|and|datatype|exception|fun|infix|infixr|local|nonfix|open|type|val|include|local|functor|signature|structure|end|in)\\b(?:$|[[:space:]]|(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])\\}|\\)|\\](?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])))",
-					"beginCaptures": {
-						"0": {
-							"name": "variable.other.class.js variable.interpolation keyword.operator keyword.control message.error"
-						}
-					},
-					"patterns": [
-						{
-							"include": "#funbind"
-						}
-					]
-				}
-			]
-		},
-		"fvalbind": {
-			"patterns": [
-				{
-					"begin": "(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]\\||^\\||[^[:word:]]and|^and|[^[:word:]]fun|^fun)",
-					"end": "(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])(:)|(=)(?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])",
-					"endCaptures": {
-						"1": {
-							"name": "variable.other.class.js variable.interpolation keyword.operator keyword.control message.error"
-						},
-						"2": {
-							"name": "variable.other.class.js variable.interpolation keyword.operator keyword.control message.error"
-						}
-					},
-					"patterns": [
-						{
-							"include": "#comment"
-						},
-						{
-							"begin": "(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]\\||^\\||[^[:word:]]and|^and|[^[:word:]]fun|^fun)",
-							"end": "(?!=(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])\\|(?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]))[:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]+|(?!=\\b(?:abstype|and|andalso|as|case|datatype|do|else|end|eqtype|exception|false|fn|fun|functor|handle|if|in|infix|infixr|include|let|local|nonfix|of|op|open|orelse|raise|rec|sharing|sig|signature|struct|structure|then|true|type|val|where|while|with|withtype)\\b)\\b[[:alpha:]][[:alnum:]'_]*(?:\\b|(?=[[:space:]]))|(?=[^[:space:][:alpha:]])",
-							"endCaptures": {
-								"0": {
-									"name": "entity.name.function"
-								}
-							}
-						},
-						{
-							"include": "#pat"
-						}
-					]
-				},
-				{
-					"begin": "(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]:|^:)",
-					"end": "(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])=(?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])|(?=\\}|\\)|\\]|\\b(?:abstype|and|datatype|exception|fun|infix|infixr|local|nonfix|open|type|val|include|local|functor|signature|structure|end|in)\\b(?:$|[[:space:]]|(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])\\}|\\)|\\](?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])))",
-					"endCaptures": {
-						"0": {
-							"name": "variable.other.class.js variable.interpolation keyword.operator keyword.control message.error"
-						}
-					},
-					"patterns": [
-						{
-							"include": "#ty"
-						}
-					]
-				},
-				{
-					"begin": "(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]=|^=)",
-					"end": "((?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])\\|(?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]))|(\\band\\b)|(?=\\}|\\)|\\]|\\b(?:abstype|and|datatype|exception|fun|infix|infixr|local|nonfix|open|type|val|include|local|functor|signature|structure|end|in)\\b(?:$|[[:space:]]|(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])\\}|\\)|\\](?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])))",
-					"endCaptures": {
-						"1": {
-							"name": "keyword.control.switch"
-						},
-						"2": {
-							"name": "variable.other.class.js variable.interpolation storage.modifier message.error"
-						}
-					},
-					"patterns": [
-						{
-							"include": "#exp"
-						}
-					]
-				}
-			]
-		},
-		"infexp": {
-			"patterns": [
-				{
-					"include": "#appexp"
-				}
-			]
-		},
-		"match": {
-			"patterns": [
-				{
-					"begin": "(?<=[^[:word:]]fn|^fn|[^[:word:]]handle|^handle|[^[:word:]]of|^of|[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]\\||^\\|)",
-					"end": "(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])=>(?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])",
-					"endCaptures": {
-						"0": {
-							"name": "keyword.control.switch"
-						}
-					},
-					"patterns": [
-						{
-							"include": "#comment"
-						},
-						{
-							"include": "#pat"
-						}
-					]
-				},
-				{
-					"begin": "(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]=>|^=>)",
-					"end": "(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])\\|(?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])|(?=,|\\}|\\)|\\]|\\b(?:abstype|and|datatype|exception|fun|infix|infixr|local|nonfix|open|type|val|include|local|functor|signature|structure|end|in)\\b(?:$|[[:space:]]|(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]),|\\}|\\)|\\](?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])))",
-					"endCaptures": {
-						"0": {
-							"name": "keyword.control.switch"
-						}
-					},
-					"patterns": [
-						{
-							"include": "#exp"
-						}
-					]
-				}
-			]
-		},
-		"pat": {
-			"patterns": [
-				{
-					"begin": "\\{",
-					"end": "\\}",
-					"captures": {
-						"0": {
-							"name": "entity.other.attribute-name.css constant.language constant.numeric"
-						}
-					},
-					"patterns": [
-						{
-							"include": "#patrow"
-						}
-					]
-				},
-				{
-					"begin": "\\[",
-					"end": "\\]",
-					"captures": {
-						"0": {
-							"name": "entity.other.attribute-name.css constant.language constant.numeric"
-						}
-					},
-					"patterns": [
-						{
-							"include": "#pat"
-						}
-					]
-				},
-				{
-					"include": "#constant"
-				},
-				{
-					"match": "((?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]),(?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]))|((?!=(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])\\|(?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]))[:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]+)|(\\bas\\b)",
-					"captures": {
-						"1": {
-							"name": "string.regexp"
-						},
-						"2": {
-							"name": "variable.other.class.js message.error variable.interpolation string.regexp"
-						},
-						"3": {
-							"name": "keyword"
-						}
-					}
-				},
-				{
-					"match": "((?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])_(?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]))|((?=[[:lower:]])(?!=\\b(?:abstype|and|andalso|as|case|datatype|do|else|end|eqtype|exception|false|fn|fun|functor|handle|if|in|infix|infixr|include|let|local|nonfix|of|op|open|orelse|raise|rec|sharing|sig|signature|struct|structure|then|true|type|val|where|while|with|withtype)\\b)\\b[[:alpha:]][[:alnum:]'_]*(?:\\b|(?=[[:space:]])))",
-					"captures": {
-						"1": {
-							"name": "comment punctuation.definition.tag"
-						},
-						"2": {
-							"name": "string.other.link variable.language variable.parameter"
-						}
-					}
-				},
-				{
-					"begin": "\\(",
-					"end": "\\)",
-					"captures": {
-						"0": {
-							"name": "punctuation.definition.tag"
-						}
-					},
-					"patterns": [
-						{
-							"include": "#comment"
-						},
-						{
-							"begin": "(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]):(?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])",
-							"end": "(?=\\))",
-							"beginCaptures": {
-								"0": {
-									"name": "variable.other.class.js variable.interpolation keyword.operator keyword.control message.error"
-								}
-							},
-							"patterns": [
-								{
-									"include": "#ty"
-								}
-							]
-						},
-						{
-							"include": "#pat"
-						}
-					]
-				}
-			]
-		},
-		"patrow": {
-			"patterns": [
-				{
-					"begin": "(?<=\\{|,)",
-					"end": "(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])(,)|(:)|(=)(?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])|(?=\\})",
-					"endCaptures": {
-						"1": {
-							"name": "string.regexp"
-						},
-						"2": {
-							"name": "variable.other.class.js variable.interpolation keyword.operator keyword.control message.error"
-						},
-						"3": {
-							"name": "variable.other.class.js variable.interpolation keyword.operator keyword.control message.error"
-						}
-					},
-					"patterns": [
-						{
-							"match": "(?!=\\b(?:abstype|and|andalso|as|case|datatype|do|else|end|eqtype|exception|false|fn|fun|functor|handle|if|in|infix|infixr|include|let|local|nonfix|of|op|open|orelse|raise|rec|sharing|sig|signature|struct|structure|then|true|type|val|where|while|with|withtype)\\b)\\b[[:alpha:]][[:alnum:]'_]*(?:\\b|(?=[[:space:]]))",
-							"name": "markup.inserted constant.language support.property-value entity.name.filename"
-						},
-						{
-							"match": "(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])\\.\\.\\.(?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])",
-							"name": "entity.other.attribute-name.css constant.language constant.numeric"
-						}
-					]
-				},
-				{
-					"begin": "(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]:|^:)",
-					"end": ",|(?=\\})",
-					"endCaptures": {
-						"0": {
-							"name": "string.regexp"
-						}
-					},
-					"patterns": [
-						{
-							"include": "#ty"
-						}
-					]
-				},
-				{
-					"begin": "(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]=|^=)",
-					"end": ",|(?=\\})",
-					"endCaptures": {
-						"0": {
-							"name": "string.regexp"
-						}
-					},
-					"patterns": [
-						{
-							"include": "#pat"
-						}
-					]
-				}
-			]
-		},
-		"qualifiedConstant": {
-			"patterns": [
-				{
-					"include": "#qualifiedPrefix"
-				},
-				{
-					"match": "(?=[[:upper:]])(?!=\\b(?:abstype|and|andalso|as|case|datatype|do|else|end|eqtype|exception|false|fn|fun|functor|handle|if|in|infix|infixr|include|let|local|nonfix|of|op|open|orelse|raise|rec|sharing|sig|signature|struct|structure|then|true|type|val|where|while|with|withtype)\\b)\\b[[:alpha:]][[:alnum:]'_]*(?:\\b|(?=[[:space:]]))",
-					"name": "entity.other.attribute-name.css constant.language constant.numeric"
-				}
-			]
-		},
-		"qualifiedModule": {
-			"patterns": [
-				{
-					"include": "#qualifiedPrefix"
-				},
-				{
-					"match": "(?=[[:upper:]])(?!=\\b(?:abstype|and|andalso|as|case|datatype|do|else|end|eqtype|exception|false|fn|fun|functor|handle|if|in|infix|infixr|include|let|local|nonfix|of|op|open|orelse|raise|rec|sharing|sig|signature|struct|structure|then|true|type|val|where|while|with|withtype)\\b)\\b[[:alpha:]][[:alnum:]'_]*(?:\\b|(?=[[:space:]]))",
-					"name": "entity.name.class constant.numeric"
-				},
-				{
-					"include": "#exp"
-				}
-			]
-		},
-		"qualifiedPrefix": {
-			"begin": "(?=[[:upper:]])(?!=\\b(?:abstype|and|andalso|as|case|datatype|do|else|end|eqtype|exception|false|fn|fun|functor|handle|if|in|infix|infixr|include|let|local|nonfix|of|op|open|orelse|raise|rec|sharing|sig|signature|struct|structure|then|true|type|val|where|while|with|withtype)\\b)\\b[[:alpha:]][[:alnum:]'_]*(?:\\b|(?=[[:space:]]))(?=[[:space:]]*\\.)",
-			"end": "\\.",
-			"beginCaptures": {
-				"0": {
-					"name": "entity.name.class constant.numeric"
-				}
+			  "0": {
+				"name": "variable.other.class.js message.error variable.interpolation string.regexp"
+			  }
 			},
 			"endCaptures": {
-				"0": {
-					"name": "keyword"
-				}
-			}
-		},
-		"qualifiedType": {
+			  "1": {
+				"name": "markup.inserted constant.language support.property-value entity.name.filename"
+			  }
+			},
 			"patterns": [
-				{
-					"include": "#qualifiedPrefix"
-				},
-				{
-					"match": "(?!=\\b(?:abstype|and|andalso|as|case|datatype|do|else|end|eqtype|exception|false|fn|fun|functor|handle|if|in|infix|infixr|include|let|local|nonfix|of|op|open|orelse|raise|rec|sharing|sig|signature|struct|structure|then|true|type|val|where|while|with|withtype)\\b)\\b[[:alpha:]][[:alnum:]'_]*(?:\\b|(?=[[:space:]]))",
-					"name": "support.type"
-				}
+			  {
+				"include": "#constantNumber"
+			  },
+			  {
+				"include": "#constantString"
+			  }
 			]
-		},
-		"row": {
+		  },
+		  {
+			"begin": "\\blet\\b",
+			"end": "(?<=[^[:word:]]end|^end)",
+			"captures": {
+			  "0": {
+				"name": "keyword.control"
+			  }
+			},
 			"patterns": [
-				{
-					"begin": "(?<=\\{|,)",
-					"end": "(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])(,)|(:)|(=)(?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])|(?=\\})",
-					"endCaptures": {
-						"1": {
-							"name": "string.regexp"
-						},
-						"2": {
-							"name": "variable.other.class.js variable.interpolation keyword.operator keyword.control message.error"
-						},
-						"3": {
-							"name": "variable.other.class.js variable.interpolation keyword.operator keyword.control message.error"
-						}
-					},
-					"patterns": [
-						{
-							"match": "(?!=\\b(?:abstype|and|andalso|as|case|datatype|do|else|end|eqtype|exception|false|fn|fun|functor|handle|if|in|infix|infixr|include|let|local|nonfix|of|op|open|orelse|raise|rec|sharing|sig|signature|struct|structure|then|true|type|val|where|while|with|withtype)\\b)\\b[[:alpha:]][[:alnum:]'_]*(?:\\b|(?=[[:space:]]))",
-							"name": "markup.inserted constant.language support.property-value entity.name.filename"
-						},
-						{
-							"match": "(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])\\.\\.\\.(?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])",
-							"name": "entity.other.attribute-name.css constant.language constant.numeric"
-						}
-					]
+			  {
+				"begin": "(?<=[^[:word:]]let|^let)",
+				"end": "\\bin\\b",
+				"endCaptures": {
+				  "0": {
+					"name": "keyword.control"
+				  }
 				},
-				{
-					"begin": "(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]:|^:)",
-					"end": ",|(?=\\})",
-					"endCaptures": {
-						"0": {
-							"name": "string.regexp"
-						}
-					},
-					"patterns": [
-						{
-							"include": "#ty"
-						}
-					]
-				},
-				{
-					"begin": "(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]=|^=)",
-					"end": ",|(?=\\})",
-					"endCaptures": {
-						"0": {
-							"name": "string.regexp"
-						}
-					},
-					"patterns": [
-						{
-							"include": "#exp"
-						}
-					]
-				}
-			]
-		},
-		"scon": {
-			"patterns": []
-		},
-		"sigbind": {
-			"patterns": [
-				{
-					"begin": "(?<=[^[:word:]]signature|^signature|[^[:word:]]and|^and)",
-					"end": "(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])=(?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])",
-					"endCaptures": {
-						"0": {
-							"name": "variable.other.class.js variable.interpolation keyword.operator keyword.control message.error"
-						}
-					},
-					"patterns": [
-						{
-							"include": "#comment"
-						},
-						{
-							"include": "#qualifiedModule"
-						}
-					]
-				},
-				{
-					"begin": "(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]=|^=)",
-					"end": "\\band\\b|(?=\\}|\\)|\\]|\\b(?:abstype|and|datatype|exception|fun|infix|infixr|local|nonfix|open|type|val|include|local|functor|signature|structure|end|in)\\b(?:$|[[:space:]]|(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])\\}|\\)|\\](?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])))",
-					"endCaptures": {
-						"0": {
-							"name": "variable.other.class.js variable.interpolation storage.modifier message.error"
-						}
-					},
-					"patterns": [
-						{
-							"include": "#sigexp"
-						}
-					]
-				},
-				{
-					"begin": "(?<=[^[:word:]]and|^and)",
-					"end": "\\band\\b|(?=\\}|\\)|\\]|\\b(?:abstype|and|datatype|exception|fun|infix|infixr|local|nonfix|open|type|val|include|local|functor|signature|structure|end|in)\\b(?:$|[[:space:]]|(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])\\}|\\)|\\](?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])))",
-					"endCaptures": {
-						"0": {
-							"name": "variable.other.class.js variable.interpolation storage.modifier message.error"
-						}
-					},
-					"patterns": [
-						{
-							"include": "#sigbind"
-						}
-					]
-				}
-			]
-		},
-		"sigdec": {
-			"patterns": [
-				{
-					"include": "#comment"
-				},
-				{
-					"begin": "\\bsignature\\b",
-					"end": "(?=\\}|\\)|\\]|\\b(?:abstype|and|datatype|exception|fun|infix|infixr|local|nonfix|open|type|val|include|local|functor|signature|structure|end|in)\\b(?:$|[[:space:]]|(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])\\}|\\)|\\](?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])))",
-					"beginCaptures": {
-						"0": {
-							"name": "keyword"
-						}
-					},
-					"patterns": [
-						{
-							"include": "#sigbind"
-						}
-					]
-				}
-			]
-		},
-		"sigexp": {
-			"patterns": [
-				{
-					"include": "#comment"
-				},
-				{
-					"begin": "\\bsig\\b",
-					"end": "\\bend\\b",
-					"patterns": [
-						{
-							"include": "#spec"
-						}
-					],
-					"captures": {
-						"0": {
-							"name": "variable.other.class.js variable.interpolation keyword.control storage.type message.error"
-						}
-					}
-				},
-				{
-					"begin": "(?<=[^[:word:]]where|^where)|\\bwhere\\b",
-					"end": "(\\bwhere\\b)|(?=(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])=(?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])|(?=\\}|\\)|\\]|\\b(?:abstype|and|datatype|exception|fun|infix|infixr|local|nonfix|open|val|include|local|functor|signature|structure|end|in)\\b(?:$|[[:space:]]|(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])\\}|\\)|\\](?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]))))",
-					"beginCaptures": {
-						"0": {
-							"name": "keyword"
-						}
-					},
-					"endCaptures": {
-						"1": {
-							"name": "keyword"
-						}
-					},
-					"patterns": [
-						{
-							"include": "#decType"
-						}
-					]
-				},
-				{
-					"include": "#qualifiedModule"
-				}
-			]
-		},
-		"spec": {
-			"patterns": [
-				{
-					"include": "#comment"
-				},
-				{
-					"include": "#decVal"
-				},
-				{
-					"include": "#decType"
-				},
-				{
-					"include": "#decDatatype"
-				},
-				{
-					"include": "#decException"
-				},
-				{
-					"include": "#strdecStructure"
-				},
-				{
-					"begin": "\\binclude\\b",
-					"end": "(?=\\}|\\)|\\]|\\b(?:abstype|and|datatype|exception|fun|infix|infixr|local|nonfix|open|type|val|include|local|functor|signature|structure|end|in)\\b(?:$|[[:space:]]|(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])\\}|\\)|\\](?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])))",
-					"beginCaptures": {
-						"0": {
-							"name": "keyword.control.include"
-						}
-					},
-					"patterns": [
-						{
-							"include": "#sigexp"
-						}
-					]
-				}
-			]
-		},
-		"strbind": {
-			"patterns": [
-				{
-					"begin": "(?<=[^[:word:]]structure|^structure|[^[:word:]]and|^and)",
-					"end": "(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])(:>?)|(=)(?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])",
-					"endCaptures": {
-						"1": {
-							"name": "variable.other.class.js variable.interpolation keyword.operator keyword.control message.error"
-						},
-						"2": {
-							"name": "variable.other.class.js variable.interpolation keyword.operator keyword.control message.error"
-						}
-					},
-					"patterns": [
-						{
-							"include": "#comment"
-						},
-						{
-							"include": "#qualifiedModule"
-						}
-					]
-				},
-				{
-					"begin": "(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]:|^:|[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]:>|^:>)",
-					"end": "(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])=(?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])|(?=\\}|\\)|\\]|\\b(?:abstype|and|datatype|exception|fun|infix|infixr|local|nonfix|open|type|val|include|local|functor|signature|structure|end|in)\\b(?:$|[[:space:]]|(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])\\}|\\)|\\](?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])))",
-					"endCaptures": {
-						"0": {
-							"name": "variable.other.class.js variable.interpolation keyword.operator keyword.control message.error"
-						}
-					},
-					"patterns": [
-						{
-							"include": "#sigexp"
-						}
-					]
-				},
-				{
-					"begin": "(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]=|^=)",
-					"end": "\\band\\b|(?=\\}|\\)|\\]|\\b(?:abstype|and|datatype|exception|fun|infix|infixr|local|nonfix|open|type|val|include|local|functor|signature|structure|end|in)\\b(?:$|[[:space:]]|(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])\\}|\\)|\\](?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])))",
-					"endCaptures": {
-						"0": {
-							"name": "variable.other.class.js variable.interpolation storage.modifier message.error"
-						}
-					},
-					"patterns": [
-						{
-							"include": "#strexp"
-						}
-					]
-				}
-			]
-		},
-		"strdec": {
-			"patterns": [
-				{
-					"include": "#comment"
-				},
-				{
+				"patterns": [
+				  {
 					"include": "#dec"
+				  }
+				]
+			  },
+			  {
+				"begin": "(?<=[^[:word:]]in|^in)",
+				"end": "\\bend\\b",
+				"endCaptures": {
+				  "0": {
+					"name": "keyword.control"
+				  }
 				},
-				{
-					"include": "#strdecStructure"
-				},
-				{
-					"begin": "\\blocal\\b",
-					"end": "(?<=[^[:word:]]end|^end)",
-					"beginCaptures": {
-						"0": {
-							"name": "keyword.control"
-						}
-					},
-					"patterns": [
-						{
-							"begin": "(?<=[^[:word:]]local|^local)",
-							"end": "\\bin\\b",
-							"endCaptures": {
-								"0": {
-									"name": "keyword.control"
-								}
-							},
-							"patterns": [
-								{
-									"include": "#dec"
-								},
-								{
-									"include": "#strdec"
-								}
-							]
-						},
-						{
-							"begin": "(?<=[^[:word:]]in|^in)",
-							"end": "\\bend\\b",
-							"endCaptures": {
-								"0": {
-									"name": "keyword.control"
-								}
-							},
-							"patterns": [
-								{
-									"include": "#dec"
-								},
-								{
-									"include": "#strdec"
-								}
-							]
-						}
-					]
-				}
-			]
-		},
-		"strdecStructure": {
-			"patterns": [
-				{
-					"begin": "\\bstructure\\b",
-					"end": "(?=\\}|\\)|\\]|\\b(?:abstype|and|datatype|exception|fun|infix|infixr|local|nonfix|open|type|val|include|local|functor|signature|structure|end|in)\\b(?:$|[[:space:]]|(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])\\}|\\)|\\](?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])))",
-					"beginCaptures": {
-						"0": {
-							"name": "variable.other.class.js variable.interpolation keyword.control storage.type message.error"
-						}
-					},
-					"patterns": [
-						{
-							"include": "#strbind"
-						}
-					]
-				}
-			]
-		},
-		"strdesc": {
-			"patterns": []
-		},
-		"strexp": {
-			"patterns": [
-				{
-					"include": "#comment"
-				},
-				{
-					"begin": "\\bstruct\\b",
-					"end": "\\bend\\b",
-					"patterns": [
-						{
-							"include": "#strdec"
-						}
-					],
-					"beginCaptures": {
-						"0": {
-							"name": "variable.other.class.js variable.interpolation keyword.control storage.type message.error"
-						}
-					},
-					"endCaptures": {
-						"0": {
-							"name": "variable.other.class.js variable.interpolation keyword.control storage.type message.error"
-						}
-					}
-				},
-				{
-					"include": "#qualifiedModule"
-				}
-			]
-		},
-		"topdec": {
-			"patterns": [
-				{
-					"include": "#strdec"
-				},
-				{
-					"include": "#sigdec"
-				},
-				{
-					"include": "#fundec"
-				},
-				{
+				"patterns": [
+				  {
 					"include": "#exp"
-				}
+				  }
+				]
+			  }
 			]
-		},
-		"ty": {
+		  },
+		  {
+			"begin": "\\{",
+			"end": "\\}",
+			"captures": {
+			  "0": {
+				"name": "entity.other.attribute-name.css constant.language constant.numeric"
+			  }
+			},
 			"patterns": [
-				{
-					"include": "#comment"
+			  {
+				"include": "#exp"
+			  }
+			]
+		  },
+		  {
+			"begin": "\\((?!=\\))",
+			"end": "\\)",
+			"captures": {
+			  "0": {
+				"name": "punctuation.definition.tag"
+			  }
+			},
+			"patterns": [
+			  {
+				"begin": "(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]):(?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])",
+				"end": "(?=\\))",
+				"beginCaptures": {
+				  "0": {
+					"name": "variable.other.class.js variable.interpolation keyword.operator keyword.control message.error"
+				  }
 				},
-				{
-					"match": "(?!=\\b(?:abstype|and|andalso|as|case|datatype|do|else|end|eqtype|exception|false|fn|fun|functor|handle|if|in|infix|infixr|include|let|local|nonfix|of|op|open|orelse|raise|rec|sharing|sig|signature|struct|structure|then|true|type|val|where|while|with|withtype)\\b)(')([[:alpha:]][[:alnum:]'_]*(?:\\b|(?=[[:space:]])))",
-					"captures": {
-						"1": {
-							"name": "punctuation.definition.tag"
-						},
-						"2": {
-							"name": "variable.parameter string.other.link variable.language"
-						}
+				"patterns": [
+				  {
+					"include": "#ty"
+				  }
+				]
+			  },
+			  {
+				"include": "#exp"
+			  }
+			]
+		  }
+		]
+	  },
+	  "atpat": {
+		"patterns": []
+	  },
+	  "comment": {
+		"begin": "\\(\\*",
+		"end": "\\*\\)",
+		"name": "comment",
+		"patterns": [
+		  {
+			"include": "#comment"
+		  }
+		]
+	  },
+	  "conbind": {
+		"patterns": [
+		  {
+			"begin": "(?<=[^[:word:]]exception|^exception|[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]=|^=|[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]\\||^\\|)",
+			"end": "(\\bof\\b)|((?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])\\|(?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]))|(?=\\}|\\)|\\]|\\b(?:abstype|and|datatype|exception|fun|infix|infixr|local|nonfix|open|type|val|include|local|functor|signature|structure|end|in)\\b(?:$|[[:space:]]|(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])\\}|\\)|\\](?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])))",
+			"endCaptures": {
+			  "1": {
+				"name": "keyword.control.switch"
+			  },
+			  "2": {
+				"name": "keyword.control.switch"
+			  }
+			},
+			"patterns": [
+			  {
+				"include": "#comment"
+			  },
+			  {
+				"match": "(?!=(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])\\|(?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]))[:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]+|(?!=\\b(?:abstype|and|andalso|as|case|datatype|do|else|end|eqtype|exception|false|fn|fun|functor|handle|if|in|infix|infixr|include|let|local|nonfix|of|op|open|orelse|raise|rec|sharing|sig|signature|struct|structure|then|true|type|val|where|while|with|withtype)\\b)\\b[[:alpha:]][[:alnum:]'_]*(?:\\b|(?=[[:space:]]))",
+				"name": "entity.other.attribute-name.css constant.language constant.numeric"
+			  }
+			]
+		  },
+		  {
+			"begin": "(?<=[^[:word:]]of|^of)",
+			"end": "(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])\\|(?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])|(?=\\}|\\)|\\]|\\b(?:abstype|and|datatype|exception|fun|infix|infixr|local|nonfix|open|type|val|include|local|functor|signature|structure|end|in)\\b(?:$|[[:space:]]|(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])\\}|\\)|\\](?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])))",
+			"endCaptures": {
+			  "0": {
+				"name": "keyword.control.switch"
+			  }
+			},
+			"patterns": [
+			  {
+				"include": "#comment"
+			  },
+			  {
+				"include": "#ty"
+			  }
+			]
+		  }
+		]
+	  },
+	  "condesc": {
+		"patterns": []
+	  },
+	  "constant": {
+		"patterns": [
+		  {
+			"include": "#constantNumber"
+		  },
+		  {
+			"include": "#constantString"
+		  },
+		  {
+			"match": "\\bfalse|true\\b",
+			"name": "entity.other.attribute-name.css constant.language constant.numeric"
+		  },
+		  {
+			"include": "#qualifiedConstant"
+		  },
+		  {
+			"match": "\\(\\)",
+			"name": "entity.other.attribute-name.css constant.language constant.numeric"
+		  },
+		  {
+			"match": "\\[\\]",
+			"name": "entity.other.attribute-name.css constant.language constant.numeric"
+		  },
+		  {
+			"begin": "\\{",
+			"end": "\\}",
+			"captures": {
+			  "0": {
+				"name": "entity.other.attribute-name.css constant.language constant.numeric"
+			  }
+			},
+			"patterns": [
+			  {
+				"include": "#row"
+			  }
+			]
+		  },
+		  {
+			"begin": "\\[",
+			"end": "\\]",
+			"captures": {
+			  "0": {
+				"name": "entity.other.attribute-name.css constant.language constant.numeric"
+			  }
+			},
+			"patterns": [
+			  {
+				"include": "#exp"
+			  }
+			]
+		  }
+		]
+	  },
+	  "constantNumber": {
+		"match": "(?<![[:alpha:]])[[:digit:]][[:digit:]]*(\\.[[:digit:]][[:digit:]]*)?",
+		"name": "constant.numeric"
+	  },
+	  "constantString": {
+		"begin": "\"",
+		"end": "\"",
+		"name": "string.double",
+		"patterns": [
+		  {
+			"match": "\\\\\""
+		  }
+		]
+	  },
+	  "datbind": {
+		"patterns": [
+		  {
+			"begin": "(?<=[^[:word:]]abstype|^abstype|[^[:word:]]and|^and|[^[:word:]]datatype|^datatype)",
+			"end": "(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])=(?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])",
+			"endCaptures": {
+			  "0": {
+				"name": "variable.other.class.js variable.interpolation keyword.operator keyword.control message.error"
+			  }
+			},
+			"patterns": [
+			  {
+				"include": "#comment"
+			  },
+			  {
+				"match": "(?!=\\b(?:abstype|and|andalso|as|case|datatype|do|else|end|eqtype|exception|false|fn|fun|functor|handle|if|in|infix|infixr|include|let|local|nonfix|of|op|open|orelse|raise|rec|sharing|sig|signature|struct|structure|then|true|type|val|where|while|with|withtype)\\b)\\b[[:alpha:]][[:alnum:]'_]*(?:\\b|(?=[[:space:]]))",
+				"name": "entity.name.function"
+			  },
+			  {
+				"include": "#ty"
+			  }
+			]
+		  },
+		  {
+			"begin": "(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]=|^=)",
+			"end": "\\band\\b|(?=\\}|\\)|\\]|\\b(?:abstype|and|datatype|exception|fun|infix|infixr|local|nonfix|open|type|val|include|local|functor|signature|structure|end|in)\\b(?:$|[[:space:]]|(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])\\}|\\)|\\](?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])))",
+			"endCaptures": {
+			  "0": {
+				"name": "variable.other.class.js variable.interpolation storage.modifier message.error"
+			  }
+			},
+			"patterns": [
+			  {
+				"include": "#conbind"
+			  }
+			]
+		  }
+		]
+	  },
+	  "datdesc": {
+		"patterns": []
+	  },
+	  "dec": {
+		"patterns": [
+		  {
+			"begin": "\\babstype\\b",
+			"end": "\\bend\\b",
+			"captures": {
+			  "0": {
+				"name": "keyword"
+			  }
+			}
+		  },
+		  {
+			"include": "#comment"
+		  },
+		  {
+			"include": "#decDatatype"
+		  },
+		  {
+			"include": "#decException"
+		  },
+		  {
+			"begin": "\\bfun\\b",
+			"end": "(?=\\}|\\)|\\]|\\b(?:abstype|and|datatype|exception|fun|infix|infixr|local|nonfix|open|type|val|include|local|functor|signature|structure|end|in)\\b(?:$|[[:space:]]|(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])\\}|\\)|\\](?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])))",
+			"beginCaptures": {
+			  "0": {
+				"name": "storage.type"
+			  }
+			},
+			"patterns": [
+			  {
+				"include": "#fvalbind"
+			  }
+			]
+		  },
+		  {
+			"begin": "\\b(?:infix|infixr|nonfix)\\b",
+			"end": "(?=\\}|\\)|\\]|\\b(?:abstype|and|datatype|exception|fun|infix|infixr|local|nonfix|open|type|val|include|local|functor|signature|structure|end|in)\\b(?:$|[[:space:]]|(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])\\}|\\)|\\](?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])))",
+			"beginCaptures": {
+			  "0": {
+				"name": "keyword.control"
+			  }
+			},
+			"patterns": [
+			  {
+				"match": "(?!=(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])\\|(?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]))[:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]+",
+				"name": "variable.other.class.js message.error variable.interpolation string.regexp"
+			  },
+			  {
+				"include": "#exp"
+			  }
+			]
+		  },
+		  {
+			"begin": "\\bopen\\b",
+			"end": "(?=\\}|\\)|\\]|\\b(?:abstype|and|datatype|exception|fun|infix|infixr|local|nonfix|open|type|val|include|local|functor|signature|structure|end|in)\\b(?:$|[[:space:]]|(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])\\}|\\)|\\](?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])))",
+			"beginCaptures": {
+			  "0": {
+				"name": "keyword.control.open"
+			  }
+			},
+			"patterns": [
+			  {
+				"include": "#qualifiedModule"
+			  }
+			]
+		  },
+		  {
+			"include": "#decType"
+		  },
+		  {
+			"include": "#decVal"
+		  }
+		]
+	  },
+	  "decDatatype": {
+		"patterns": [
+		  {
+			"begin": "\\bdatatype\\b",
+			"end": "(?=\\}|\\)|\\]|\\b(?:abstype|and|datatype|exception|fun|infix|infixr|local|nonfix|open|type|val|include|local|functor|signature|structure|end|in)\\b(?:$|[[:space:]]|(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])\\}|\\)|\\](?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])))",
+			"beginCaptures": {
+			  "0": {
+				"name": "keyword"
+			  }
+			},
+			"patterns": [
+			  {
+				"include": "#datbind"
+			  }
+			]
+		  }
+		]
+	  },
+	  "decException": {
+		"patterns": [
+		  {
+			"begin": "\\bexception\\b",
+			"end": "(?=\\}|\\)|\\]|\\b(?:abstype|and|datatype|exception|fun|infix|infixr|local|nonfix|open|type|val|include|local|functor|signature|structure|end|in)\\b(?:$|[[:space:]]|(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])\\}|\\)|\\](?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])))",
+			"beginCaptures": {
+			  "0": {
+				"name": "keyword"
+			  }
+			},
+			"patterns": [
+			  {
+				"include": "#comment"
+			  },
+			  {
+				"include": "#conbind"
+			  }
+			]
+		  }
+		]
+	  },
+	  "decType": {
+		"patterns": [
+		  {
+			"begin": "\\btype\\b",
+			"end": "(?=\\}|\\)|\\]|\\b(?:abstype|and|datatype|exception|fun|infix|infixr|local|nonfix|open|type|val|include|local|functor|signature|structure|end|in)\\b(?:$|[[:space:]]|(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])\\}|\\)|\\](?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])))|(?=\\bwhere\\b|=)",
+			"beginCaptures": {
+			  "0": {
+				"name": "keyword"
+			  }
+			},
+			"patterns": [
+			  {
+				"include": "#typbind"
+			  }
+			]
+		  }
+		]
+	  },
+	  "decVal": {
+		"begin": "\\bval\\b",
+		"end": "(?=\\}|\\)|\\]|\\b(?:abstype|and|datatype|exception|fun|infix|infixr|local|nonfix|open|type|val|include|local|functor|signature|structure|end|in)\\b(?:$|[[:space:]]|(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])\\}|\\)|\\](?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])))",
+		"beginCaptures": {
+		  "0": {
+			"name": "storage.type"
+		  }
+		},
+		"patterns": [
+		  {
+			"include": "#valbind"
+		  }
+		]
+	  },
+	  "exbind": {
+		"patterns": []
+	  },
+	  "exdesc": {
+		"patterns": []
+	  },
+	  "exp": {
+		"patterns": [
+		  {
+			"include": "#atexp"
+		  },
+		  {
+			"match": "((?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]),(?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]))|(;|(?!=(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])\\|(?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]))[:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]+)|(\\bas\\b)",
+			"captures": {
+			  "1": {
+				"name": "string.regexp"
+			  },
+			  "2": {
+				"name": "variable.other.class.js message.error variable.interpolation string.regexp"
+			  },
+			  "3": {
+				"name": "keyword"
+			  }
+			}
+		  },
+		  {
+			"begin": "\\bhandle\\b",
+			"end": "(?=,|\\}|\\)|\\]|\\b(?:abstype|and|datatype|exception|fun|infix|infixr|local|nonfix|open|type|val|include|local|functor|signature|structure|end|in)\\b(?:$|[[:space:]]|(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]),|\\}|\\)|\\](?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])))",
+			"beginCaptures": {
+			  "0": {
+				"name": "keyword.control.throwcatch"
+			  }
+			},
+			"patterns": [
+			  {
+				"include": "#match"
+			  }
+			]
+		  },
+		  {
+			"match": "\\braise\\b",
+			"name": "keyword.control.throwcatch"
+		  },
+		  {
+			"begin": "\\bfn\\b",
+			"end": "(?=,|\\}|\\)|\\]|\\b(?:abstype|and|datatype|exception|fun|infix|infixr|local|nonfix|open|type|val|include|local|functor|signature|structure|end|in)\\b(?:$|[[:space:]]|(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]),|\\}|\\)|\\](?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])))",
+			"beginCaptures": {
+			  "0": {
+				"name": "keyword"
+			  }
+			},
+			"patterns": [
+			  {
+				"include": "#match"
+			  }
+			]
+		  },
+		  {
+			"patterns": [
+			  {
+				"begin": "\\bcase\\b",
+				"end": "\\bof\\b",
+				"captures": {
+				  "0": {
+					"name": "keyword.control.switch"
+				  }
+				},
+				"patterns": [
+				  {
+					"include": "#exp"
+				  }
+				]
+			  },
+			  {
+				"begin": "(?<=[^[:word:]]of|^of)",
+				"end": "(?=,|\\}|\\)|\\]|\\b(?:abstype|and|datatype|exception|fun|infix|infixr|local|nonfix|open|type|val|include|local|functor|signature|structure|end|in)\\b(?:$|[[:space:]]|(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]),|\\}|\\)|\\](?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])))",
+				"endCaptures": {
+				  "0": {
+					"name": "variable.other.class.js message.error variable.interpolation string.regexp"
+				  }
+				},
+				"patterns": [
+				  {
+					"include": "#match"
+				  }
+				]
+			  }
+			]
+		  },
+		  {
+			"match": "\\b(?:if|then|else)\\b",
+			"name": "keyword"
+		  },
+		  {
+			"match": "\\borelse\\b",
+			"name": "variable.other.class.js message.error variable.interpolation string.regexp"
+		  },
+		  {
+			"match": "\\bandalso\\b",
+			"name": "variable.other.class.js message.error variable.interpolation string.regexp"
+		  },
+		  {
+			"match": "\\b(?:while|do)\\b",
+			"name": "keyword"
+		  }
+		]
+	  },
+	  "funbind": {
+		"patterns": [
+		  {
+			"begin": "(?<=[^[:word:]]functor|^functor|[^[:word:]]and|^and)",
+			"end": "(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])(:)|(=)(?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])",
+			"endCaptures": {
+			  "1": {
+				"name": "variable.other.class.js variable.interpolation keyword.operator keyword.control message.error"
+			  },
+			  "2": {
+				"name": "variable.other.class.js variable.interpolation keyword.operator keyword.control message.error"
+			  }
+			},
+			"patterns": [
+			  {
+				"include": "#comment"
+			  },
+			  {
+				"include": "#qualifiedModule"
+			  },
+			  {
+				"begin": "\\(",
+				"end": "\\)",
+				"captures": {
+				  "0": {
+					"name": "punctuation.definition.tag"
+				  }
+				},
+				"patterns": [
+				  {
+					"include": "#spec"
+				  },
+				  {
+					"begin": "(?!=\\b(?:abstype|and|andalso|as|case|datatype|do|else|end|eqtype|exception|false|fn|fun|functor|handle|if|in|infix|infixr|include|let|local|nonfix|of|op|open|orelse|raise|rec|sharing|sig|signature|struct|structure|then|true|type|val|where|while|with|withtype)\\b)\\b[[:alpha:]][[:alnum:]'_]*(?:\\b|(?=[[:space:]]))",
+					"end": "(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]):(?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])",
+					"beginCaptures": {
+					  "0": {
+						"name": "entity.name.class constant.numeric"
+					  }
+					},
+					"endCaptures": {
+					  "0": {
+						"name": "variable.other.class.js variable.interpolation keyword.operator keyword.control message.error"
+					  }
 					}
-				},
-				{
-					"begin": "\\{",
-					"end": "\\}",
-					"captures": {
-						"0": {
-							"name": "entity.other.attribute-name.css constant.language constant.numeric"
-						}
-					},
-					"patterns": [
-						{
-							"include": "#row"
-						}
-					]
-				},
-				{
-					"match": "(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])->|\\*(?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])",
-					"name": "markup.inserted string.regexp"
-				},
-				{
-					"begin": "\\(",
-					"end": "\\)",
-					"captures": {
-						"0": {
-							"name": "punctuation.definition.tag"
-						}
-					},
-					"patterns": [
-						{
-							"include": "#ty"
-						},
-						{
-							"match": ",",
-							"name": "string.regexp"
-						}
-					]
-				},
-				{
-					"patterns": [
-						{
-							"include": "#qualifiedType"
-						}
-					]
-				}
-			]
-		},
-		"typbind": {
-			"patterns": [
-				{
-					"begin": "(?<=[^[:word:]]type|^type)",
-					"end": "(?=\\}|\\)|\\]|\\b(?:abstype|and|datatype|exception|fun|infix|infixr|local|nonfix|open|type|val|include|local|functor|signature|structure|end|in)\\b(?:$|[[:space:]]|(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])\\}|\\)|\\](?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])))|((?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])=(?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]))",
-					"endCaptures": {
-						"0": {
-							"name": "variable.other.class.js variable.interpolation keyword.operator keyword.control message.error"
-						}
-					},
-					"patterns": [
-						{
-							"include": "#comment"
-						},
-						{
-							"match": "(?!=\\b(?:abstype|and|andalso|as|case|datatype|do|else|end|eqtype|exception|false|fn|fun|functor|handle|if|in|infix|infixr|include|let|local|nonfix|of|op|open|orelse|raise|rec|sharing|sig|signature|struct|structure|then|true|type|val|where|while|with|withtype)\\b)\\b[[:alpha:]][[:alnum:]'_]*(?:\\b|(?=[[:space:]]))",
-							"name": "entity.name.function"
-						},
-						{
-							"include": "#ty"
-						}
-					]
-				},
-				{
-					"begin": "(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]=|^=)",
-					"end": "(?=\\}|\\)|\\]|\\b(?:abstype|and|datatype|exception|fun|infix|infixr|local|nonfix|open|type|val|include|local|functor|signature|structure|end|in)\\b(?:$|[[:space:]]|(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])\\}|\\)|\\](?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])))|(?=\\bwhere\\b|=)",
-					"patterns": [
-						{
-							"include": "#comment"
-						},
-						{
-							"include": "#ty"
-						}
-					]
-				}
-			]
-		},
-		"typdesc": {
-			"patterns": []
-		},
-		"valbind": {
-			"patterns": [
-				{
-					"begin": "(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]\\||^\\||[^[:word:]]and|^and|[^[:word:]]val|^val)",
-					"end": "(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])(:)|(=)(?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])|(?=\\}|\\)|\\]|\\b(?:abstype|and|datatype|exception|fun|infix|infixr|local|nonfix|open|type|val|include|local|functor|signature|structure|end|in)\\b(?:$|[[:space:]]|(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])\\}|\\)|\\](?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])))",
-					"endCaptures": {
-						"1": {
-							"name": "variable.other.class.js variable.interpolation keyword.operator keyword.control message.error"
-						},
-						"2": {
-							"name": "variable.other.class.js variable.interpolation keyword.operator keyword.control message.error"
-						}
-					},
-					"patterns": [
-						{
-							"begin": "(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]\\||^\\||[^[:word:]]and|^and|[^[:word:]]val|^val)",
-							"end": "(\\brec\\b)|((?=[[:lower:]])(?!=\\b(?:abstype|and|andalso|as|case|datatype|do|else|end|eqtype|exception|false|fn|fun|functor|handle|if|in|infix|infixr|include|let|local|nonfix|of|op|open|orelse|raise|rec|sharing|sig|signature|struct|structure|then|true|type|val|where|while|with|withtype)\\b)\\b[[:alpha:]][[:alnum:]'_]*(?:\\b|(?=[[:space:]])))|(?=[^[:space:][:alpha:]])",
-							"endCaptures": {
-								"1": {
-									"name": "variable.other.class.js variable.interpolation keyword.operator keyword.control message.error"
-								},
-								"2": {
-									"name": "entity.name.function"
-								}
-							},
-							"patterns": [
-								{
-									"include": "#pat"
-								}
-							]
-						},
-						{
-							"begin": "(?<=[^[:word:]]rec|^rec)",
-							"end": "((?=[[:lower:]])(?!=\\b(?:abstype|and|andalso|as|case|datatype|do|else|end|eqtype|exception|false|fn|fun|functor|handle|if|in|infix|infixr|include|let|local|nonfix|of|op|open|orelse|raise|rec|sharing|sig|signature|struct|structure|then|true|type|val|where|while|with|withtype)\\b)\\b[[:alpha:]][[:alnum:]'_]*(?:\\b|(?=[[:space:]])))|(?=[^[:space:][:alpha:]])",
-							"endCaptures": {
-								"0": {
-									"name": "entity.name.function"
-								}
-							}
-						},
-						{
-							"include": "#pat"
-						}
-					]
-				},
-				{
+				  },
+				  {
 					"begin": "(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]:|^:)",
-					"end": "(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])=(?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])|(?=\\}|\\)|\\]|\\b(?:abstype|and|datatype|exception|fun|infix|infixr|local|nonfix|open|type|val|include|local|functor|signature|structure|end|in)\\b(?:$|[[:space:]]|(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])\\}|\\)|\\](?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])))",
-					"endCaptures": {
-						"0": {
-							"name": "variable.other.class.js variable.interpolation keyword.operator keyword.control message.error"
-						}
-					},
+					"end": "(?=\\))",
 					"patterns": [
-						{
-							"include": "#ty"
-						}
+					  {
+						"include": "#sigexp"
+					  }
 					]
-				},
-				{
-					"begin": "(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]=|^=)",
-					"end": "((?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])\\|(?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]))|(\\band\\b)|(?=\\}|\\)|\\]|\\b(?:abstype|and|datatype|exception|fun|infix|infixr|local|nonfix|open|type|val|include|local|functor|signature|structure|end|in)\\b(?:$|[[:space:]]|(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])\\}|\\)|\\](?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])))",
-					"endCaptures": {
-						"1": {
-							"name": "keyword.control.switch"
-						},
-						"2": {
-							"name": "variable.other.class.js variable.interpolation storage.modifier message.error"
-						}
-					},
-					"patterns": [
-						{
-							"include": "#exp"
-						}
-					]
-				}
+				  }
+				]
+			  }
 			]
+		  },
+		  {
+			"begin": "(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]:|^:)",
+			"end": "(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])=(?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])",
+			"endCaptures": {
+			  "0": {
+				"name": "variable.other.class.js variable.interpolation keyword.operator keyword.control message.error"
+			  }
+			},
+			"patterns": [
+			  {
+				"include": "#sigexp"
+			  }
+			]
+		  },
+		  {
+			"begin": "(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]=|^=)",
+			"end": "(?=\\}|\\)|\\]|\\b(?:abstype|and|datatype|exception|fun|infix|infixr|local|nonfix|open|type|val|include|local|functor|signature|structure|end|in)\\b(?:$|[[:space:]]|(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])\\}|\\)|\\](?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])))",
+			"endCaptures": {
+			  "0": {
+				"name": "keyword"
+			  }
+			},
+			"patterns": [
+			  {
+				"include": "#strexp"
+			  }
+			]
+		  },
+		  {
+			"begin": "(?<=[^[:word:]]and|^and)",
+			"end": "(?=\\}|\\)|\\]|\\b(?:abstype|and|datatype|exception|fun|infix|infixr|local|nonfix|open|type|val|include|local|functor|signature|structure|end|in)\\b(?:$|[[:space:]]|(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])\\}|\\)|\\](?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])))",
+			"endCaptures": {
+			  "0": {
+				"name": "keyword"
+			  }
+			},
+			"patterns": [
+			  {
+				"include": "#funbind"
+			  }
+			]
+		  }
+		]
+	  },
+	  "fundec": {
+		"patterns": [
+		  {
+			"include": "#comment"
+		  },
+		  {
+			"begin": "\\bfunctor\\b",
+			"end": "(?=\\}|\\)|\\]|\\b(?:abstype|and|datatype|exception|fun|infix|infixr|local|nonfix|open|type|val|include|local|functor|signature|structure|end|in)\\b(?:$|[[:space:]]|(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])\\}|\\)|\\](?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])))",
+			"beginCaptures": {
+			  "0": {
+				"name": "variable.other.class.js variable.interpolation keyword.operator keyword.control message.error"
+			  }
+			},
+			"patterns": [
+			  {
+				"include": "#funbind"
+			  }
+			]
+		  }
+		]
+	  },
+	  "fvalbind": {
+		"patterns": [
+		  {
+			"begin": "(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]\\||^\\||[^[:word:]]and|^and|[^[:word:]]fun|^fun)",
+			"end": "(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])(:)|(=)(?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])",
+			"endCaptures": {
+			  "1": {
+				"name": "variable.other.class.js variable.interpolation keyword.operator keyword.control message.error"
+			  },
+			  "2": {
+				"name": "variable.other.class.js variable.interpolation keyword.operator keyword.control message.error"
+			  }
+			},
+			"patterns": [
+			  {
+				"include": "#comment"
+			  },
+			  {
+				"begin": "(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]\\||^\\||[^[:word:]]and|^and|[^[:word:]]fun|^fun)",
+				"end": "(?!=(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])\\|(?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]))[:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]+|(?!=\\b(?:abstype|and|andalso|as|case|datatype|do|else|end|eqtype|exception|false|fn|fun|functor|handle|if|in|infix|infixr|include|let|local|nonfix|of|op|open|orelse|raise|rec|sharing|sig|signature|struct|structure|then|true|type|val|where|while|with|withtype)\\b)\\b[[:alpha:]][[:alnum:]'_]*(?:\\b|(?=[[:space:]]))|(?=[^[:space:][:alpha:]])",
+				"endCaptures": {
+				  "0": {
+					"name": "entity.name.function"
+				  }
+				}
+			  },
+			  {
+				"include": "#pat"
+			  }
+			]
+		  },
+		  {
+			"begin": "(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]:|^:)",
+			"end": "(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])=(?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])|(?=\\}|\\)|\\]|\\b(?:abstype|and|datatype|exception|fun|infix|infixr|local|nonfix|open|type|val|include|local|functor|signature|structure|end|in)\\b(?:$|[[:space:]]|(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])\\}|\\)|\\](?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])))",
+			"endCaptures": {
+			  "0": {
+				"name": "variable.other.class.js variable.interpolation keyword.operator keyword.control message.error"
+			  }
+			},
+			"patterns": [
+			  {
+				"include": "#ty"
+			  }
+			]
+		  },
+		  {
+			"begin": "(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]=|^=)",
+			"end": "((?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])\\|(?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]))|(\\band\\b)|(?=\\}|\\)|\\]|\\b(?:abstype|and|datatype|exception|fun|infix|infixr|local|nonfix|open|type|val|include|local|functor|signature|structure|end|in)\\b(?:$|[[:space:]]|(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])\\}|\\)|\\](?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])))",
+			"endCaptures": {
+			  "1": {
+				"name": "keyword.control.switch"
+			  },
+			  "2": {
+				"name": "variable.other.class.js variable.interpolation storage.modifier message.error"
+			  }
+			},
+			"patterns": [
+			  {
+				"include": "#exp"
+			  }
+			]
+		  }
+		]
+	  },
+	  "infexp": {
+		"patterns": [
+		  {
+			"include": "#appexp"
+		  }
+		]
+	  },
+	  "match": {
+		"patterns": [
+		  {
+			"begin": "(?<=[^[:word:]]fn|^fn|[^[:word:]]handle|^handle|[^[:word:]]of|^of|[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]\\||^\\|)",
+			"end": "(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])=>(?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])",
+			"endCaptures": {
+			  "0": {
+				"name": "keyword.control.switch"
+			  }
+			},
+			"patterns": [
+			  {
+				"include": "#comment"
+			  },
+			  {
+				"include": "#pat"
+			  }
+			]
+		  },
+		  {
+			"begin": "(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]=>|^=>)",
+			"end": "(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])\\|(?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])|(?=,|\\}|\\)|\\]|\\b(?:abstype|and|datatype|exception|fun|infix|infixr|local|nonfix|open|type|val|include|local|functor|signature|structure|end|in)\\b(?:$|[[:space:]]|(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]),|\\}|\\)|\\](?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])))",
+			"endCaptures": {
+			  "0": {
+				"name": "keyword.control.switch"
+			  }
+			},
+			"patterns": [
+			  {
+				"include": "#exp"
+			  }
+			]
+		  }
+		]
+	  },
+	  "pat": {
+		"patterns": [
+		  {
+			"begin": "\\{",
+			"end": "\\}",
+			"captures": {
+			  "0": {
+				"name": "entity.other.attribute-name.css constant.language constant.numeric"
+			  }
+			},
+			"patterns": [
+			  {
+				"include": "#patrow"
+			  }
+			]
+		  },
+		  {
+			"begin": "\\[",
+			"end": "\\]",
+			"captures": {
+			  "0": {
+				"name": "entity.other.attribute-name.css constant.language constant.numeric"
+			  }
+			},
+			"patterns": [
+			  {
+				"include": "#pat"
+			  }
+			]
+		  },
+		  {
+			"include": "#constant"
+		  },
+		  {
+			"match": "((?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]),(?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]))|((?!=(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])\\|(?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]))[:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]+)|(\\bas\\b)",
+			"captures": {
+			  "1": {
+				"name": "string.regexp"
+			  },
+			  "2": {
+				"name": "variable.other.class.js message.error variable.interpolation string.regexp"
+			  },
+			  "3": {
+				"name": "keyword"
+			  }
+			}
+		  },
+		  {
+			"match": "((?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])_(?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]))|((?=[[:lower:]])(?!=\\b(?:abstype|and|andalso|as|case|datatype|do|else|end|eqtype|exception|false|fn|fun|functor|handle|if|in|infix|infixr|include|let|local|nonfix|of|op|open|orelse|raise|rec|sharing|sig|signature|struct|structure|then|true|type|val|where|while|with|withtype)\\b)\\b[[:alpha:]][[:alnum:]'_]*(?:\\b|(?=[[:space:]])))",
+			"captures": {
+			  "1": {
+				"name": "comment punctuation.definition.tag"
+			  },
+			  "2": {
+				"name": "string.other.link variable.language variable.parameter"
+			  }
+			}
+		  },
+		  {
+			"begin": "\\(",
+			"end": "\\)",
+			"captures": {
+			  "0": {
+				"name": "punctuation.definition.tag"
+			  }
+			},
+			"patterns": [
+			  {
+				"include": "#comment"
+			  },
+			  {
+				"begin": "(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]):(?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])",
+				"end": "(?=\\))",
+				"beginCaptures": {
+				  "0": {
+					"name": "variable.other.class.js variable.interpolation keyword.operator keyword.control message.error"
+				  }
+				},
+				"patterns": [
+				  {
+					"include": "#ty"
+				  }
+				]
+			  },
+			  {
+				"include": "#pat"
+			  }
+			]
+		  }
+		]
+	  },
+	  "patrow": {
+		"patterns": [
+		  {
+			"begin": "(?<=\\{|,)",
+			"end": "(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])(,)|(:)|(=)(?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])|(?=\\})",
+			"endCaptures": {
+			  "1": {
+				"name": "string.regexp"
+			  },
+			  "2": {
+				"name": "variable.other.class.js variable.interpolation keyword.operator keyword.control message.error"
+			  },
+			  "3": {
+				"name": "variable.other.class.js variable.interpolation keyword.operator keyword.control message.error"
+			  }
+			},
+			"patterns": [
+			  {
+				"match": "(?!=\\b(?:abstype|and|andalso|as|case|datatype|do|else|end|eqtype|exception|false|fn|fun|functor|handle|if|in|infix|infixr|include|let|local|nonfix|of|op|open|orelse|raise|rec|sharing|sig|signature|struct|structure|then|true|type|val|where|while|with|withtype)\\b)\\b[[:alpha:]][[:alnum:]'_]*(?:\\b|(?=[[:space:]]))",
+				"name": "markup.inserted constant.language support.property-value entity.name.filename"
+			  },
+			  {
+				"match": "(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])\\.\\.\\.(?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])",
+				"name": "entity.other.attribute-name.css constant.language constant.numeric"
+			  }
+			]
+		  },
+		  {
+			"begin": "(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]:|^:)",
+			"end": ",|(?=\\})",
+			"endCaptures": {
+			  "0": {
+				"name": "string.regexp"
+			  }
+			},
+			"patterns": [
+			  {
+				"include": "#ty"
+			  }
+			]
+		  },
+		  {
+			"begin": "(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]=|^=)",
+			"end": ",|(?=\\})",
+			"endCaptures": {
+			  "0": {
+				"name": "string.regexp"
+			  }
+			},
+			"patterns": [
+			  {
+				"include": "#pat"
+			  }
+			]
+		  }
+		]
+	  },
+	  "qualifiedConstant": {
+		"patterns": [
+		  {
+			"include": "#qualifiedPrefix"
+		  },
+		  {
+			"match": "(?=[[:upper:]])(?!=\\b(?:abstype|and|andalso|as|case|datatype|do|else|end|eqtype|exception|false|fn|fun|functor|handle|if|in|infix|infixr|include|let|local|nonfix|of|op|open|orelse|raise|rec|sharing|sig|signature|struct|structure|then|true|type|val|where|while|with|withtype)\\b)\\b[[:alpha:]][[:alnum:]'_]*(?:\\b|(?=[[:space:]]))",
+			"name": "entity.other.attribute-name.css constant.language constant.numeric"
+		  }
+		]
+	  },
+	  "qualifiedModule": {
+		"patterns": [
+		  {
+			"include": "#qualifiedPrefix"
+		  },
+		  {
+			"match": "(?=[[:upper:]])(?!=\\b(?:abstype|and|andalso|as|case|datatype|do|else|end|eqtype|exception|false|fn|fun|functor|handle|if|in|infix|infixr|include|let|local|nonfix|of|op|open|orelse|raise|rec|sharing|sig|signature|struct|structure|then|true|type|val|where|while|with|withtype)\\b)\\b[[:alpha:]][[:alnum:]'_]*(?:\\b|(?=[[:space:]]))",
+			"name": "entity.name.class constant.numeric"
+		  },
+		  {
+			"include": "#exp"
+		  }
+		]
+	  },
+	  "qualifiedPrefix": {
+		"begin": "(?=[[:upper:]])(?!=\\b(?:abstype|and|andalso|as|case|datatype|do|else|end|eqtype|exception|false|fn|fun|functor|handle|if|in|infix|infixr|include|let|local|nonfix|of|op|open|orelse|raise|rec|sharing|sig|signature|struct|structure|then|true|type|val|where|while|with|withtype)\\b)\\b[[:alpha:]][[:alnum:]'_]*(?:\\b|(?=[[:space:]]))(?=[[:space:]]*\\.)",
+		"end": "\\.",
+		"beginCaptures": {
+		  "0": {
+			"name": "entity.name.class constant.numeric"
+		  }
 		},
-		"valdesc": {
-			"patterns": []
+		"endCaptures": {
+		  "0": {
+			"name": "keyword"
+		  }
 		}
+	  },
+	  "qualifiedType": {
+		"patterns": [
+		  {
+			"include": "#qualifiedPrefix"
+		  },
+		  {
+			"match": "(?!=\\b(?:abstype|and|andalso|as|case|datatype|do|else|end|eqtype|exception|false|fn|fun|functor|handle|if|in|infix|infixr|include|let|local|nonfix|of|op|open|orelse|raise|rec|sharing|sig|signature|struct|structure|then|true|type|val|where|while|with|withtype)\\b)\\b[[:alpha:]][[:alnum:]'_]*(?:\\b|(?=[[:space:]]))",
+			"name": "support.type"
+		  }
+		]
+	  },
+	  "row": {
+		"patterns": [
+		  {
+			"begin": "(?<=\\{|,)",
+			"end": "(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])(,)|(:)|(=)(?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])|(?=\\})",
+			"endCaptures": {
+			  "1": {
+				"name": "string.regexp"
+			  },
+			  "2": {
+				"name": "variable.other.class.js variable.interpolation keyword.operator keyword.control message.error"
+			  },
+			  "3": {
+				"name": "variable.other.class.js variable.interpolation keyword.operator keyword.control message.error"
+			  }
+			},
+			"patterns": [
+			  {
+				"match": "(?!=\\b(?:abstype|and|andalso|as|case|datatype|do|else|end|eqtype|exception|false|fn|fun|functor|handle|if|in|infix|infixr|include|let|local|nonfix|of|op|open|orelse|raise|rec|sharing|sig|signature|struct|structure|then|true|type|val|where|while|with|withtype)\\b)\\b[[:alpha:]][[:alnum:]'_]*(?:\\b|(?=[[:space:]]))",
+				"name": "markup.inserted constant.language support.property-value entity.name.filename"
+			  },
+			  {
+				"match": "(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])\\.\\.\\.(?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])",
+				"name": "entity.other.attribute-name.css constant.language constant.numeric"
+			  }
+			]
+		  },
+		  {
+			"begin": "(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]:|^:)",
+			"end": ",|(?=\\})",
+			"endCaptures": {
+			  "0": {
+				"name": "string.regexp"
+			  }
+			},
+			"patterns": [
+			  {
+				"include": "#ty"
+			  }
+			]
+		  },
+		  {
+			"begin": "(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]=|^=)",
+			"end": ",|(?=\\})",
+			"endCaptures": {
+			  "0": {
+				"name": "string.regexp"
+			  }
+			},
+			"patterns": [
+			  {
+				"include": "#exp"
+			  }
+			]
+		  }
+		]
+	  },
+	  "scon": {
+		"patterns": []
+	  },
+	  "sigbind": {
+		"patterns": [
+		  {
+			"begin": "(?<=[^[:word:]]signature|^signature|[^[:word:]]and|^and)",
+			"end": "(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])=(?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])",
+			"endCaptures": {
+			  "0": {
+				"name": "variable.other.class.js variable.interpolation keyword.operator keyword.control message.error"
+			  }
+			},
+			"patterns": [
+			  {
+				"include": "#comment"
+			  },
+			  {
+				"include": "#qualifiedModule"
+			  }
+			]
+		  },
+		  {
+			"begin": "(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]=|^=)",
+			"end": "\\band\\b|(?=\\}|\\)|\\]|\\b(?:abstype|and|datatype|exception|fun|infix|infixr|local|nonfix|open|type|val|include|local|functor|signature|structure|end|in)\\b(?:$|[[:space:]]|(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])\\}|\\)|\\](?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])))",
+			"endCaptures": {
+			  "0": {
+				"name": "variable.other.class.js variable.interpolation storage.modifier message.error"
+			  }
+			},
+			"patterns": [
+			  {
+				"include": "#sigexp"
+			  }
+			]
+		  },
+		  {
+			"begin": "(?<=[^[:word:]]and|^and)",
+			"end": "\\band\\b|(?=\\}|\\)|\\]|\\b(?:abstype|and|datatype|exception|fun|infix|infixr|local|nonfix|open|type|val|include|local|functor|signature|structure|end|in)\\b(?:$|[[:space:]]|(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])\\}|\\)|\\](?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])))",
+			"endCaptures": {
+			  "0": {
+				"name": "variable.other.class.js variable.interpolation storage.modifier message.error"
+			  }
+			},
+			"patterns": [
+			  {
+				"include": "#sigbind"
+			  }
+			]
+		  }
+		]
+	  },
+	  "sigdec": {
+		"patterns": [
+		  {
+			"include": "#comment"
+		  },
+		  {
+			"begin": "\\bsignature\\b",
+			"end": "(?=\\}|\\)|\\]|\\b(?:abstype|and|datatype|exception|fun|infix|infixr|local|nonfix|open|type|val|include|local|functor|signature|structure|end|in)\\b(?:$|[[:space:]]|(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])\\}|\\)|\\](?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])))",
+			"beginCaptures": {
+			  "0": {
+				"name": "keyword"
+			  }
+			},
+			"patterns": [
+			  {
+				"include": "#sigbind"
+			  }
+			]
+		  }
+		]
+	  },
+	  "sigexp": {
+		"patterns": [
+		  {
+			"include": "#comment"
+		  },
+		  {
+			"begin": "\\bsig\\b",
+			"end": "\\bend\\b",
+			"patterns": [
+			  {
+				"include": "#spec"
+			  }
+			],
+			"captures": {
+			  "0": {
+				"name": "variable.other.class.js variable.interpolation keyword.control storage.type message.error"
+			  }
+			}
+		  },
+		  {
+			"begin": "(?<=[^[:word:]]where|^where)|\\bwhere\\b",
+			"end": "(\\bwhere\\b)|(?=(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])=(?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])|(?=\\}|\\)|\\]|\\b(?:abstype|and|datatype|exception|fun|infix|infixr|local|nonfix|open|val|include|local|functor|signature|structure|end|in)\\b(?:$|[[:space:]]|(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])\\}|\\)|\\](?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]))))",
+			"beginCaptures": {
+			  "0": {
+				"name": "keyword"
+			  }
+			},
+			"endCaptures": {
+			  "1": {
+				"name": "keyword"
+			  }
+			},
+			"patterns": [
+			  {
+				"include": "#decType"
+			  }
+			]
+		  },
+		  {
+			"include": "#qualifiedModule"
+		  }
+		]
+	  },
+	  "spec": {
+		"patterns": [
+		  {
+			"include": "#comment"
+		  },
+		  {
+			"include": "#decVal"
+		  },
+		  {
+			"include": "#decType"
+		  },
+		  {
+			"include": "#decDatatype"
+		  },
+		  {
+			"include": "#decException"
+		  },
+		  {
+			"include": "#strdecStructure"
+		  },
+		  {
+			"begin": "\\binclude\\b",
+			"end": "(?=\\}|\\)|\\]|\\b(?:abstype|and|datatype|exception|fun|infix|infixr|local|nonfix|open|type|val|include|local|functor|signature|structure|end|in)\\b(?:$|[[:space:]]|(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])\\}|\\)|\\](?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])))",
+			"beginCaptures": {
+			  "0": {
+				"name": "keyword.control.include"
+			  }
+			},
+			"patterns": [
+			  {
+				"include": "#sigexp"
+			  }
+			]
+		  }
+		]
+	  },
+	  "strbind": {
+		"patterns": [
+		  {
+			"begin": "(?<=[^[:word:]]structure|^structure|[^[:word:]]and|^and)",
+			"end": "(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])(:>?)|(=)(?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])",
+			"endCaptures": {
+			  "1": {
+				"name": "variable.other.class.js variable.interpolation keyword.operator keyword.control message.error"
+			  },
+			  "2": {
+				"name": "variable.other.class.js variable.interpolation keyword.operator keyword.control message.error"
+			  }
+			},
+			"patterns": [
+			  {
+				"include": "#comment"
+			  },
+			  {
+				"include": "#qualifiedModule"
+			  }
+			]
+		  },
+		  {
+			"begin": "(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]:|^:|[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]:>|^:>)",
+			"end": "(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])=(?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])|(?=\\}|\\)|\\]|\\b(?:abstype|and|datatype|exception|fun|infix|infixr|local|nonfix|open|type|val|include|local|functor|signature|structure|end|in)\\b(?:$|[[:space:]]|(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])\\}|\\)|\\](?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])))",
+			"endCaptures": {
+			  "0": {
+				"name": "variable.other.class.js variable.interpolation keyword.operator keyword.control message.error"
+			  }
+			},
+			"patterns": [
+			  {
+				"include": "#sigexp"
+			  }
+			]
+		  },
+		  {
+			"begin": "(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]=|^=)",
+			"end": "\\band\\b|(?=\\}|\\)|\\]|\\b(?:abstype|and|datatype|exception|fun|infix|infixr|local|nonfix|open|type|val|include|local|functor|signature|structure|end|in)\\b(?:$|[[:space:]]|(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])\\}|\\)|\\](?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])))",
+			"endCaptures": {
+			  "0": {
+				"name": "variable.other.class.js variable.interpolation storage.modifier message.error"
+			  }
+			},
+			"patterns": [
+			  {
+				"include": "#strexp"
+			  }
+			]
+		  }
+		]
+	  },
+	  "strdec": {
+		"patterns": [
+		  {
+			"include": "#comment"
+		  },
+		  {
+			"include": "#dec"
+		  },
+		  {
+			"include": "#strdecStructure"
+		  },
+		  {
+			"begin": "\\blocal\\b",
+			"end": "(?<=[^[:word:]]end|^end)",
+			"beginCaptures": {
+			  "0": {
+				"name": "keyword.control"
+			  }
+			},
+			"patterns": [
+			  {
+				"begin": "(?<=[^[:word:]]local|^local)",
+				"end": "\\bin\\b",
+				"endCaptures": {
+				  "0": {
+					"name": "keyword.control"
+				  }
+				},
+				"patterns": [
+				  {
+					"include": "#dec"
+				  },
+				  {
+					"include": "#strdec"
+				  }
+				]
+			  },
+			  {
+				"begin": "(?<=[^[:word:]]in|^in)",
+				"end": "\\bend\\b",
+				"endCaptures": {
+				  "0": {
+					"name": "keyword.control"
+				  }
+				},
+				"patterns": [
+				  {
+					"include": "#dec"
+				  },
+				  {
+					"include": "#strdec"
+				  }
+				]
+			  }
+			]
+		  }
+		]
+	  },
+	  "strdecStructure": {
+		"patterns": [
+		  {
+			"begin": "\\bstructure\\b",
+			"end": "(?=\\}|\\)|\\]|\\b(?:abstype|and|datatype|exception|fun|infix|infixr|local|nonfix|open|type|val|include|local|functor|signature|structure|end|in)\\b(?:$|[[:space:]]|(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])\\}|\\)|\\](?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])))",
+			"beginCaptures": {
+			  "0": {
+				"name": "variable.other.class.js variable.interpolation keyword.control storage.type message.error"
+			  }
+			},
+			"patterns": [
+			  {
+				"include": "#strbind"
+			  }
+			]
+		  }
+		]
+	  },
+	  "strdesc": {
+		"patterns": []
+	  },
+	  "strexp": {
+		"patterns": [
+		  {
+			"include": "#comment"
+		  },
+		  {
+			"begin": "\\bstruct\\b",
+			"end": "\\bend\\b",
+			"patterns": [
+			  {
+				"include": "#strdec"
+			  }
+			],
+			"beginCaptures": {
+			  "0": {
+				"name": "variable.other.class.js variable.interpolation keyword.control storage.type message.error"
+			  }
+			},
+			"endCaptures": {
+			  "0": {
+				"name": "variable.other.class.js variable.interpolation keyword.control storage.type message.error"
+			  }
+			}
+		  },
+		  {
+			"include": "#qualifiedModule"
+		  }
+		]
+	  },
+	  "topdec": {
+		"patterns": [
+		  {
+			"include": "#strdec"
+		  },
+		  {
+			"include": "#sigdec"
+		  },
+		  {
+			"include": "#fundec"
+		  },
+		  {
+			"include": "#exp"
+		  }
+		]
+	  },
+	  "ty": {
+		"patterns": [
+		  {
+			"include": "#comment"
+		  },
+		  {
+			"match": "(?!=\\b(?:abstype|and|andalso|as|case|datatype|do|else|end|eqtype|exception|false|fn|fun|functor|handle|if|in|infix|infixr|include|let|local|nonfix|of|op|open|orelse|raise|rec|sharing|sig|signature|struct|structure|then|true|type|val|where|while|with|withtype)\\b)(')([[:alpha:]][[:alnum:]'_]*(?:\\b|(?=[[:space:]])))",
+			"captures": {
+			  "1": {
+				"name": "punctuation.definition.tag"
+			  },
+			  "2": {
+				"name": "variable.parameter string.other.link variable.language"
+			  }
+			}
+		  },
+		  {
+			"begin": "\\{",
+			"end": "\\}",
+			"captures": {
+			  "0": {
+				"name": "entity.other.attribute-name.css constant.language constant.numeric"
+			  }
+			},
+			"patterns": [
+			  {
+				"include": "#row"
+			  }
+			]
+		  },
+		  {
+			"match": "(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])->|\\*(?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])",
+			"name": "markup.inserted string.regexp"
+		  },
+		  {
+			"begin": "\\(",
+			"end": "\\)",
+			"captures": {
+			  "0": {
+				"name": "punctuation.definition.tag"
+			  }
+			},
+			"patterns": [
+			  {
+				"include": "#ty"
+			  },
+			  {
+				"match": ",",
+				"name": "string.regexp"
+			  }
+			]
+		  },
+		  {
+			"patterns": [
+			  {
+				"include": "#qualifiedType"
+			  }
+			]
+		  }
+		]
+	  },
+	  "typbind": {
+		"patterns": [
+		  {
+			"begin": "(?<=[^[:word:]]type|^type)",
+			"end": "(?=\\}|\\)|\\]|\\b(?:abstype|and|datatype|exception|fun|infix|infixr|local|nonfix|open|type|val|include|local|functor|signature|structure|end|in)\\b(?:$|[[:space:]]|(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])\\}|\\)|\\](?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])))|((?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])=(?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]))",
+			"endCaptures": {
+			  "0": {
+				"name": "variable.other.class.js variable.interpolation keyword.operator keyword.control message.error"
+			  }
+			},
+			"patterns": [
+			  {
+				"include": "#comment"
+			  },
+			  {
+				"match": "(?!=\\b(?:abstype|and|andalso|as|case|datatype|do|else|end|eqtype|exception|false|fn|fun|functor|handle|if|in|infix|infixr|include|let|local|nonfix|of|op|open|orelse|raise|rec|sharing|sig|signature|struct|structure|then|true|type|val|where|while|with|withtype)\\b)\\b[[:alpha:]][[:alnum:]'_]*(?:\\b|(?=[[:space:]]))",
+				"name": "entity.name.function"
+			  },
+			  {
+				"include": "#ty"
+			  }
+			]
+		  },
+		  {
+			"begin": "(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]=|^=)",
+			"end": "(?=\\}|\\)|\\]|\\b(?:abstype|and|datatype|exception|fun|infix|infixr|local|nonfix|open|type|val|include|local|functor|signature|structure|end|in)\\b(?:$|[[:space:]]|(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])\\}|\\)|\\](?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])))|(?=\\bwhere\\b|=)",
+			"patterns": [
+			  {
+				"include": "#comment"
+			  },
+			  {
+				"include": "#ty"
+			  }
+			]
+		  }
+		]
+	  },
+	  "typdesc": {
+		"patterns": []
+	  },
+	  "valbind": {
+		"patterns": [
+		  {
+			"begin": "(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]\\||^\\||[^[:word:]]and|^and|[^[:word:]]val|^val)",
+			"end": "(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])(:)|(=)(?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])|(?=\\}|\\)|\\]|\\b(?:abstype|and|datatype|exception|fun|infix|infixr|local|nonfix|open|type|val|include|local|functor|signature|structure|end|in)\\b(?:$|[[:space:]]|(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])\\}|\\)|\\](?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])))",
+			"endCaptures": {
+			  "1": {
+				"name": "variable.other.class.js variable.interpolation keyword.operator keyword.control message.error"
+			  },
+			  "2": {
+				"name": "variable.other.class.js variable.interpolation keyword.operator keyword.control message.error"
+			  }
+			},
+			"patterns": [
+			  {
+				"begin": "(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]\\||^\\||[^[:word:]]and|^and|[^[:word:]]val|^val)",
+				"end": "(\\brec\\b)|((?=[[:lower:]])(?!=\\b(?:abstype|and|andalso|as|case|datatype|do|else|end|eqtype|exception|false|fn|fun|functor|handle|if|in|infix|infixr|include|let|local|nonfix|of|op|open|orelse|raise|rec|sharing|sig|signature|struct|structure|then|true|type|val|where|while|with|withtype)\\b)\\b[[:alpha:]][[:alnum:]'_]*(?:\\b|(?=[[:space:]])))|(?=[^[:space:][:alpha:]])",
+				"endCaptures": {
+				  "1": {
+					"name": "variable.other.class.js variable.interpolation keyword.operator keyword.control message.error"
+				  },
+				  "2": {
+					"name": "entity.name.function"
+				  }
+				},
+				"patterns": [
+				  {
+					"include": "#pat"
+				  }
+				]
+			  },
+			  {
+				"begin": "(?<=[^[:word:]]rec|^rec)",
+				"end": "((?=[[:lower:]])(?!=\\b(?:abstype|and|andalso|as|case|datatype|do|else|end|eqtype|exception|false|fn|fun|functor|handle|if|in|infix|infixr|include|let|local|nonfix|of|op|open|orelse|raise|rec|sharing|sig|signature|struct|structure|then|true|type|val|where|while|with|withtype)\\b)\\b[[:alpha:]][[:alnum:]'_]*(?:\\b|(?=[[:space:]])))|(?=[^[:space:][:alpha:]])",
+				"endCaptures": {
+				  "0": {
+					"name": "entity.name.function"
+				  }
+				}
+			  },
+			  {
+				"include": "#pat"
+			  }
+			]
+		  },
+		  {
+			"begin": "(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]:|^:)",
+			"end": "(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])=(?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])|(?=\\}|\\)|\\]|\\b(?:abstype|and|datatype|exception|fun|infix|infixr|local|nonfix|open|type|val|include|local|functor|signature|structure|end|in)\\b(?:$|[[:space:]]|(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])\\}|\\)|\\](?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])))",
+			"endCaptures": {
+			  "0": {
+				"name": "variable.other.class.js variable.interpolation keyword.operator keyword.control message.error"
+			  }
+			},
+			"patterns": [
+			  {
+				"include": "#ty"
+			  }
+			]
+		  },
+		  {
+			"begin": "(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]=|^=)",
+			"end": "((?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])\\|(?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]))|(\\band\\b)|(?=\\}|\\)|\\]|\\b(?:abstype|and|datatype|exception|fun|infix|infixr|local|nonfix|open|type|val|include|local|functor|signature|structure|end|in)\\b(?:$|[[:space:]]|(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])\\}|\\)|\\](?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])))",
+			"endCaptures": {
+			  "1": {
+				"name": "keyword.control.switch"
+			  },
+			  "2": {
+				"name": "variable.other.class.js variable.interpolation storage.modifier message.error"
+			  }
+			},
+			"patterns": [
+			  {
+				"include": "#exp"
+			  }
+			]
+		  }
+		]
+	  },
+	  "valdesc": {
+		"patterns": []
+	  }
 	}
-}
+  }
