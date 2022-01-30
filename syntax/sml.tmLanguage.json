@@ -75,6 +75,9 @@
 				"patterns": [
 				  {
 					"include": "#dec"
+				  },
+				  {
+					"include": "#comment"
 				  }
 				]
 			  },
@@ -259,7 +262,7 @@
 		"name": "string.double",
 		"patterns": [
 		  {
-			"match": "\\\\\""
+			"match": "(?x)\\\\(?:[\"\\\\abtnvfr]|[0-9]{3}|\\^[@-_]|u[0-9a-fA-F]{4}|[^\\\\]*\\\\)"
 		  }
 		]
 	  },
@@ -521,7 +524,7 @@
 				]
 			  },
 			  {
-				"begin": "(?<=[^[:word:]]of|^of)",
+				"begin": "(?<=[^[:word:]]of|^of)(?=[^[:word:]])",
 				"end": "(?=,|\\}|\\)|\\]|\\b(?:abstype|and|datatype|exception|fun|infix|infixr|local|nonfix|open|type|val|include|local|functor|signature|structure|end|in)\\b(?:$|[[:space:]]|(?<=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$]),|\\}|\\)|\\](?=[^:!?'@/\\-\\*\\\\\\+\\|&#%`^<=>~$])))",
 				"endCaptures": {
 				  "0": {
