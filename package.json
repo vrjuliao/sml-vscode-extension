@@ -1,9 +1,9 @@
 {
-	"name": "sml-environment",
-	"displayName": "SML Environment",
-	"description": "Standard ML environment execution",
-	"version": "0.0.3",
-	"publisher": "vrjuliao",
+	"name": "easy-sml",
+	"displayName": "Easy SML",
+	"description": "Standard ML environment execution with highlighting, auto-completion, and formatting.",
+	"version": "0.0.5",
+	"publisher": "yansanity",
 	"icon": "demo-media/icon.png",
 	"license": "Apache-2.0",
 	"bugs": {
@@ -38,6 +38,10 @@
 			{
 				"command": "sml-environment.execCurrentFile",
 				"title": "SML Environment: Execute current file"
+			},
+			{
+				"command": "sml-environment.format",
+				"title": "SML Environment: format current file"
 			}
 		],
 		"keybindings": [
@@ -53,6 +57,11 @@
 				"language": "sml",
 				"scopeName": "source.sml",
 				"path": "./syntax/sml.tmLanguage.json"
+			}
+		],
+		"formatters": [
+			{
+				"language": "sml"
 			}
 		],
 		"languages": [

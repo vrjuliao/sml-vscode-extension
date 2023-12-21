@@ -2,13 +2,13 @@
 SML Environment is an extension for
 [Visual Studio Code](https://code.visualstudio.com/), allowing short executions
 like [EMACS sml-mode](https://www.smlnj.org/doc/Emacs/sml-mode.html) and
-providing a text-highlight with some auto-complete features.
+providing a text-highlight, auto format and some auto-complete features.
 
 This project is been developed by **Vinícius Julião**
 ([`@vrjuliao`](https://github.com/vrjuliao)), but the text-highlight is an 
 updated version of
 [Standard ML](https://marketplace.visualstudio.com/items?itemName=freebroccolo.sml) extension
-by **Darin Morrison** ([`@freebroccolo`](https://github.com/freebroccolo/))
+by **Darin Morrison** ([`@freebroccolo`](https://github.com/freebroccolo/)), the code auto formatting feature is developed by **yansanity** ([`@yansanity`](https://github.com/ysinsane/)).
 
 ## Features
 - Short Execution:
