@@ -2,7 +2,7 @@
 	"name": "easy-sml",
 	"displayName": "Easy SML",
 	"description": "Standard ML environment execution with highlighting, auto-completion, and formatting.",
-	"version": "0.0.4",
+	"version": "0.0.5",
 	"publisher": "yansanity",
 	"icon": "demo-media/icon.png",
 	"license": "Apache-2.0",
