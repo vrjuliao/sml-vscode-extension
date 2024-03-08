@@ -258,9 +258,12 @@
 		"end": "\"",
 		"name": "string.double",
 		"patterns": [
-		  {
-			"match": "\\\\\""
-		  }
+			{
+				"match": "\\\\."
+			},
+			{
+				"match": "[^\\\\\"]+"
+			}
 		]
 	  },
 	  "datbind": {
